@@ -1,5 +1,4 @@
-import { computed } from 'vue'
-import { UnwrapRef } from 'vue-demi'
+import { computed, type UnwrapRef } from 'vue'
 import { useQuery } from 'vue-query'
 import _ from 'lodash'
 import Parser from '~/utils/parser'

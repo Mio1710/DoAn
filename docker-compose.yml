@@ -27,7 +27,8 @@ services:
       - "3000:3000"
     env_file:
       - "./docker/env/${ENVIRONMENT}/.env.api"
-    command: npm run start:dev
+    volumes:
+      - ./backend:/app
     networks:
       - thesis-network
   

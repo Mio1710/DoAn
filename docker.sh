@@ -5,7 +5,7 @@ COMPONENTS=("backend" "db" "frontend" "nginx")
 ACTIONS=("build" "up" "down" "restart")
 
 API_LOCAL_URL="api.thesis.edu.vn"
-FRONTEND_LOCAL_URL="frontend.thesis.edu.vn"
+FRONTEND_LOCAL_URL="thesis.edu.vn"
 
 while getopts "e:a:" opt; do
     case $opt in

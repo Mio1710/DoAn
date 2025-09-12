@@ -3,8 +3,9 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  ssr: false,
   devServer: {
-    host: process.env.BASE_URL,
+    host: '0.0.0.0',
     port: 4000,
   },
 
@@ -66,9 +67,9 @@ export default defineNuxtConfig({
       },
       token: {
         signInResponseTokenPointer: '/access_token',
-        type: 'Bearer',
-        cookieName: 'auth.token',
-        headerName: 'Authorization',
+        // type: 'Bearer',
+        // cookieName: 'auth.token',
+        // headerName: 'Authorization',
         maxAgeInSeconds: 18000,
       },
       pages: {
