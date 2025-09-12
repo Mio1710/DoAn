@@ -1,0 +1,28 @@
+.bottom-border {
+  border-bottom: 1px solid;
+  border-color: #e0e0e0;
+  margin-bottom: 16px;
+}
+
+// custom scroll bar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #bdbdbd;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #757575;
+}

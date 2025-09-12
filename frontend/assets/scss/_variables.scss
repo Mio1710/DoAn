@@ -1,0 +1,35 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'vuetify/lib/styles/tools/functions' as *;
+
+// Custom Variables
+// colors
+$white: #fff !default;
+
+// cards
+$card-title-size: 18px !default;
+
+$body-font-family: 'Roboto', sans-serif !default;
+$body-font-family: 'MuseoModerno', cursive !default;
+$body-font-family: 'Ysabeau Infant', sans-serif !default;
+
+$border-radius-root: 4px !default;
+$btn-font-weight: 400 !default;
+$btn-letter-spacing: 0 !default;
+$font-size-root: 14px;
+$list-indent-size: 14px;
+
+@forward 'vuetify/settings' with (
+  $list-item-icon-margin-end: 10px !important,
+  $font-size-root: 14px !default,
+  $list-indent-size: 14px !important,
+
+  //table row height
+  $table-row-height: 30px !important,
+  $table-header-height: 30px !important,
+
+  // input
+  $input-control-height: 30px !important,
+);
+
