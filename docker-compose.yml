@@ -1,0 +1,59 @@
+networks:
+  thesis-network:
+    driver: bridge
+
+services:
+  frontend:  
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ${PROJECT}-frontend
+    ports:
+      - "4000:4000"
+    env_file:
+      - "./docker/env/${ENVIRONMENT}/.env.frontend"
+    command: npm run dev
+    networks:
+      - thesis-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ${PROJECT}-backend
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    env_file:
+      - "./docker/env/${ENVIRONMENT}/.env.api"
+    command: npm run start:dev
+    networks:
+      - thesis-network
+  
+  db:
+    image: mysql:8.0 
+    container_name: ${PROJECT}-mysql_db
+    env_file:
+      - "./docker/env/${ENVIRONMENT}/.env.db"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      - thesis-network
+
+  nginx:
+    container_name: ${PROJECT}-nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - thesis-network
+

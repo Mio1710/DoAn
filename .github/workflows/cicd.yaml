@@ -1,0 +1,31 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+env:
+  PROJECT: 'Doan FE'
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Nodejs
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+
+    - name: Install dependencies by yarn
+      run: yarn install
+#
+#    - name: Build project
+#      run: yarn build
+    - name: restart server
+      run: pm2 restart 10 --update-env
