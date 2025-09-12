@@ -3,7 +3,6 @@ export class AdminApi extends BaseApi {
   getTeachers(params) {
     return this.get('/public/teachers', { params })
   }
-
   getTeacherss(params) {
     return this.get('/admin/teachers', { params })
   }
