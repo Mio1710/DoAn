@@ -8,6 +8,11 @@ export const SuperAdminMenu: menu = {
       icon: 'mdi-list-box-outline',
       to: '/admin/super/faculty',
     },
+    {
+      title: 'Tạo đợt đăng ký mới',
+      icon: 'mdi-book',
+      to: '/admin/super/semester',
+    },
   ],
 }
 export const CurrentSemesterMenu: menu = {
@@ -141,11 +146,6 @@ export const AdminMenu: menu = {
       title: 'Quản lý sinh viên khóa luận',
       icon: 'mdi-view-dashboard',
       to: '/admin/faculty/student-topic',
-    },
-    {
-      title: 'Tạo đợt đăng ký mới',
-      icon: 'mdi-book',
-      to: '/admin/faculty/semester',
     },
     {
       title: 'Quản lý giảng viên',

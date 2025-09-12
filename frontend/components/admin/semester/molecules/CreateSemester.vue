@@ -31,6 +31,7 @@ const create = () => {
       queryClient.invalidateQueries('semester')
       $toast.success('Tạo mới thành công')
     })
+    emit('cancel')
   } catch (error) {
     console.log(error)
   }

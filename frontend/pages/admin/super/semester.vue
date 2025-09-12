@@ -6,7 +6,7 @@ import CreateSemester from '~/components/admin/semester/molecules/CreateSemester
 
 definePageMeta({
   layout: 'auth',
-  middleware: ['is-admin'],
+  middleware: ['is-super-admin'],
 })
 const isCreate = ref(false)
 const semester = ref('')
