@@ -1,7 +1,5 @@
 import { computed, type UnwrapRef } from 'vue'
 import { useQuery } from 'vue-query'
-import _ from 'lodash'
-import Parser from '~/utils/parser'
 
 export default function useGetCurrentSemesters(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()

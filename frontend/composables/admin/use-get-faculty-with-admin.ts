@@ -1,20 +1,5 @@
 import { computed, type UnwrapRef } from 'vue'
 import { useQuery } from 'vue-query'
-import _ from 'lodash'
-import Parser from '~/utils/parser'
-function sortsParser(sortBy: string | [], sortType: string | []) {
-  if (!sortBy) {
-    return []
-  }
-
-  if (Array.isArray(sortBy)) {
-    return _.map(_.zip(sortBy, sortType), ([sortBy, sortType]) => {
-      return sortType === 'desc' ? `-${sortBy}` : sortBy
-    })
-  }
-
-  return [sortType === 'desc' ? `-${sortBy}` : sortBy]
-}
 
 export default function useGetFacultyWithAdmin(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()
@@ -22,22 +7,7 @@ export default function useGetFacultyWithAdmin(params?: UnwrapRef<any>, options?
   const query = useQuery(
     ['faculty-admins', params],
     () => {
-      const { sortBy, sortType } = params.value
-      const sorts = sortsParser(sortBy, sortType)
-
-      const query = new Parser({
-        includes: [],
-        appends: [],
-        fields: {},
-        filters: {},
-        sorts,
-        page: params.value.page,
-        limit: params.value.rowsPerPage,
-        payload: null,
-        ...params.value,
-      }).query()
-
-      return $api.superAdmin.getFacultyWithAdmin(query)
+      return $api.superAdmin.getFacultyWithAdmin()
     },
     {
       refetchOnWindowFocus: false,

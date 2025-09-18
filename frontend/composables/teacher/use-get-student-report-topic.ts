@@ -1,8 +1,5 @@
-import { computed } from 'vue'
-import { UnwrapRef } from 'vue-demi'
+import { computed, type UnwrapRef } from 'vue'
 import { useQuery } from 'vue-query'
-import Parser from '~/utils/parser'
-import { sortsParser } from '~/utils/sortParser'
 
 export default function useGetStudentReportTopics(params?: UnwrapRef<any>, options?: any) {
   const { $api } = useNuxtApp()
@@ -11,23 +8,7 @@ export default function useGetStudentReportTopics(params?: UnwrapRef<any>, optio
   const query = useQuery(
     ['student-report-topic', params],
     () => {
-      const { sortBy, sortType } = params.value
-      const sorts = sortsParser(sortBy, sortType)
-      console.log('params in useQuery', params, params.value)
-
-      const query = new Parser({
-        includes: [],
-        appends: [],
-        fields: {},
-        filters: {},
-        sorts,
-        page: params.value.page,
-        limit: params.value.rowsPerPage,
-        payload: null,
-        ...params.value,
-      }).query()
-
-      return $api.teacher.getStudentReportTopics(query)
+      return $api.teacher.getStudentReportTopics()
     },
     {
       refetchOnWindowFocus: false,

@@ -1,5 +1,5 @@
+import type { UnwrapRef } from 'vue'
 import { computed } from 'vue'
-import { UnwrapRef } from 'vue-demi'
 import { useQuery } from 'vue-query'
 
 export default function useGetStudentResultTopics(params?: UnwrapRef<any>, options?: any) {
