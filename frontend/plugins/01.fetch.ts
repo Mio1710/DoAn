@@ -1,3 +1,5 @@
+// file name: 01.fetch.ts to ensure it runs before api.ts
+
 export default defineNuxtPlugin((nuxtApp) => {
   const runtimeConfig = useRuntimeConfig()
   const baseUrl = runtimeConfig.public.apiBase

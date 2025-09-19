@@ -3,17 +3,20 @@ import type { APIParams, BaseResponse, ErrorResponse } from '~/types/ResponseTyp
 import type { FetchError, Fetch, FetchOptions } from 'ofetch'
 
 export class BaseApi {
+  public readonly fetch: Fetch
+  constructor(fetch: Fetch) {
+    this.fetch = fetch
+  }
+
   public async get(endpoint: string, config?: FetchOptions): Promise<unknown> {
-    const { $fetchClient } = useNuxtApp()
-    return await $fetchClient(endpoint).catch((error: FetchError) => {
+    return await this.fetch(endpoint).catch((error: FetchError) => {
       this.toastError(error)
     })
   }
 
   public async post(endpoint: string, data?: any, config?: APIParams): Promise<BaseResponse | unknown> {
     try {
-      const { $fetchClient } = useNuxtApp()
-      return await $fetchClient(endpoint, { method: 'POST', body: data, ...config })
+        return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
     } catch (error) {
       await this.toastError(error)
     }
@@ -21,8 +24,7 @@ export class BaseApi {
 
   public async postDownload(endpoint: string, data?: any, config?: APIParams): Promise<unknown> {
     try {
-      const { $fetchClient } = useNuxtApp()
-      return await $fetchClient(endpoint, { method: 'POST', body: data, ...config })
+        return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
     } catch (error) {
       await this.toastError(error)
     }
@@ -30,8 +32,7 @@ export class BaseApi {
 
   public async put(endpoint: string, data?: any): Promise<unknown> {
     try {
-      const { $fetchClient } = useNuxtApp()
-      return await $fetchClient(endpoint, { method: 'PUT', body: data })
+        return await this.fetch(endpoint, { method: 'PUT', body: data })
     } catch (error) {
       await this.toastError(error)
     }
@@ -39,8 +40,7 @@ export class BaseApi {
 
   public async delete(endpoint: string, data?: any): Promise<unknown> {
     try {
-      const { $fetchClient } = useNuxtApp()
-      return await $fetchClient(endpoint, { method: 'DELETE', body: data })
+        return await this.fetch(endpoint, { method: 'DELETE', body: data })
     } catch (error) {
       await this.toastError(error)
     }
