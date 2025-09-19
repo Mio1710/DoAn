@@ -1,4 +1,4 @@
-import { BaseApi } from '~/api/base'
+import { BaseApi } from './base'
 export class TeacherInternAPI extends BaseApi {
 
     getTeacherInterns(params) {

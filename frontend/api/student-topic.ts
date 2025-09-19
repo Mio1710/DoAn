@@ -1,4 +1,4 @@
-import { BaseApi } from '~/api/base'
+import { BaseApi } from './base'
 export class StudentTopicAPI extends BaseApi {
   getStudentTopics(params) {
     return this.get('/student-topic', { params })

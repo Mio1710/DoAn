@@ -1,10 +1,10 @@
-import { BaseApi } from '~/api/base'
+import { BaseApi } from '@/api/base'
 export class AuthApi extends BaseApi {
-  changePassword(data) {
+  changePassword(data: any) {
     return this.put('/auth/change-password', data)
   }
 
-  updateProfile(data) {
+  updateProfile(data: any) {
     return this.put('/auth/profile', data)
   }
 }

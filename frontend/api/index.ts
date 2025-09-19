@@ -1,4 +1,4 @@
-import type { AxiosInstance } from 'axios'
+import type { Fetch } from 'ofetch';
 import { SemesterAPI } from '~/api/semester'
 import { AdminApi } from '~/api/admin'
 import { StudentTopicAPI } from '~/api/student-topic'
@@ -17,6 +17,7 @@ import { AuthApi } from '~/api/auth'
 import { SuperAdminApi } from '~/api/super-admin'
 import { ReportReportTopicAPI } from '~/api/report-topic'
 import {  ReportReportInternAPI } from '~/api/report-intern'
+import { BaseApi } from './base';
 export class Api {
   public readonly semester: SemesterAPI
   public readonly teacher: TeacherApi
@@ -37,28 +38,28 @@ export class Api {
   public readonly reportTopic: ReportReportTopicAPI
   public readonly reportIntern: ReportReportInternAPI
 
-  constructor(axios: AxiosInstance) {
-    this.semester = new SemesterAPI(axios)
-    this.teacher = new TeacherApi(axios)
-    this.studentTopic = new StudentTopicAPI(axios)
-    this.studentIntern = new StudentInternAPI(axios)
-    this.topic = new TopicAPI(axios)
-    this.faculty = new FacultyAPI(axios)
-    this.superTeacher = new SuperTeacherAPI(axios)
-    this.lo = new LOAPI(axios)
-    this.results = new ResultsAPI(axios)
-    this.admin = new AdminApi(axios)
-    this.teacherGroup = new TeacherGroupAPI(axios)
-    this.intern = new InternAPI(axios)
-    this.teacherIntern = new TeacherInternAPI(axios)
-    this.studentTeacher = new StudentTeacherApi(axios)
-    this.auth = new AuthApi(axios)
-    this.superAdmin = new SuperAdminApi(axios)
-    this.reportTopic = new ReportReportTopicAPI(axios)
-    this.reportIntern = new ReportReportInternAPI(axios)
-    this.auth = new AuthApi(axios)
-    this.superAdmin = new SuperAdminApi(axios)
-    this.reportTopic = new ReportReportTopicAPI(axios)
-    this.intern = new InternAPI(axios)
+  constructor() {
+    this.semester = new SemesterAPI()
+    this.teacher = new TeacherApi()
+    this.studentTopic = new StudentTopicAPI()
+    this.studentIntern = new StudentInternAPI()
+    this.topic = new TopicAPI()
+    this.faculty = new FacultyAPI()
+    this.superTeacher = new SuperTeacherAPI()
+    this.lo = new LOAPI()
+    this.results = new ResultsAPI()
+    this.admin = new AdminApi()
+    this.teacherGroup = new TeacherGroupAPI()
+    this.intern = new InternAPI()
+    this.teacherIntern = new TeacherInternAPI()
+    this.studentTeacher = new StudentTeacherApi()
+    this.auth = new AuthApi()
+    this.superAdmin = new SuperAdminApi()
+    this.reportTopic = new ReportReportTopicAPI()
+    this.reportIntern = new ReportReportInternAPI()
+    this.auth = new AuthApi()
+    this.superAdmin = new SuperAdminApi()
+    this.reportTopic = new ReportReportTopicAPI()
+    this.intern = new InternAPI()
   }
 }

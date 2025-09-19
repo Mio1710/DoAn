@@ -7,6 +7,11 @@ export interface ApiPaginate {
   per_page: number
   total: number
 }
+export interface APIParams {
+  params?: any,
+  query?: any,
+  responseType?: 'json' | 'blob' | 'text'
+}
 
 type BaseResponse<T = any> = {
   status: number

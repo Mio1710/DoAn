@@ -1,24 +1,23 @@
-import { computed, type UnwrapRef } from 'vue'
-import { useQuery } from 'vue-query'
+import { Api } from '~/api'
+import type { APIParams } from '~/types/ResponseTypes'
 
-export default function useGetStudentRecommendTopics(params?: UnwrapRef<any>, options?: any) {
-  const { $api } = useNuxtApp()
+export default function useGetStudentRecommendTopics(params?: APIParams, options?: any) {
+  const { $fetchClient } = useNuxtApp()
+  const { data, error, execute, pending } = useAsyncData('getStudentRecommendTopics', () =>
+  {
+    console.log('Fetching student recommend topics with params:', params);
 
-  const query = useQuery(
-    ['student-recommend-topic', params],
-    () => {
-      return $api.teacher.getStudentRecommendTopic()
-    },
-    {
-      refetchOnWindowFocus: false,
-      ...options,
-    },
+    return $fetchClient(`/teachers/student-topic/recommend-topics`, {
+      body: params,
+      ...options
+    })
+  }
   )
 
-  const items = computed(() => query.data.value?.data || [])
-
   return {
-    ...query,
-    items,
+    items: data?.data ?? [],
+    execute,
+    error,
+    isLoading: pending,
   }
 }
