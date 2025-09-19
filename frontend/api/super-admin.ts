@@ -1,4 +1,4 @@
-import { BaseApi } from '~/api/base'
+import { BaseApi } from './base'
 export class SuperAdminApi extends BaseApi {
   getFacultyWithAdmin() {
     return this.get('/super-admin/faculty')

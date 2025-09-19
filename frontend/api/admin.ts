@@ -1,76 +1,77 @@
-import { BaseApi } from '~/api/base'
+import { BaseApi } from '@/api/base'
+import type { APIParams } from '~/types/ResponseTypes'
 export class AdminApi extends BaseApi {
-  getTeachers(params) {
+  getTeachers(params: APIParams) {
     return this.get('/public/teachers', { params })
   }
-  getTeacherss(params) {
+  getTeacherss(params: APIParams) {
     return this.get('/admin/teachers', { params })
   }
 
 
-  getTeacher(id) {
+  getTeacher(id: number) {
     return this.get(`/admin/teachers/${id}`)
   }
 
-  createTeacher(data) {
+  createTeacher(data: any) {
     return this.post('/admin/teachers', data)
   }
 
-  updateTeacher(id, data) {
+  updateTeacher(id: number, data: any) {
     return this.put(`/admin/teachers/${id}`, data)
   }
 
-  deleteTeacher(id) {
+  deleteTeacher(id: number) {
     return this.delete(`/admin/teachers/${id}`)
   }
 
-  activeTeacher(id, data) {
+  activeTeacher(id: number, data: any) {
     return this.post(`/admin/teachers/${id}/update-role`, { data })
   }
 
-  importUser(data) {
+  importUser(data: any) {
     return this.post('/admin/teachers/import', data, {
       responseType: 'blob',
     })
   }
 
-  createSuperTeacher(data) {
+  createSuperTeacher(data: any) {
     return this.post('/super-admin/super-teacher', data)
   }
 
-  getStudentTopics(params) {
+  getStudentTopics(params: APIParams) {
     return this.get('/admin/teachers/student-topic', { params })
   }
 
-  resetPassword(id) {
+  resetPassword(id: number) {
     return this.put(`/admin/teachers/${id}/reset-password`)
   }
 
-  createStudentTopic(data) {
+  createStudentTopic(data: any) {
     return this.post('/admin/student-topic', data)
   }
 
-  updateStudentTopic(id, data) {
+  updateStudentTopic(id: number, data: any) {
     return this.put(`/admin/student-topic/${id}/info`, data)
   }
 
-  deleteStudentTopic(id) {
+  deleteStudentTopic(id: number) {
     return this.delete(`/admin/student-topic/${id}`)
   }
 
-  getStudentInterns(params) {
+  getStudentInterns(params: APIParams) {
 
     return this.get('/admin/teachers/student-intern', { params })
   }
 
-  createStudentIntern(data) {
+  createStudentIntern(data: any) {
     return this.post('/admin/student-intern', data)
   }
 
-  updateStudentIntern(id, data) {
+  updateStudentIntern(id: number, data: any) {
     return this.put(`/admin/student-intern/${id}/info`, data)
   }
-  deleteStudentIntern(id) {
+  deleteStudentIntern(id: number) {
     return this.delete(`/admin/student-intern/${id}`)
 }
 }

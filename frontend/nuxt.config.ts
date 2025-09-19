@@ -4,10 +4,10 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   ssr: false,
-  devServer: {
-    host: '0.0.0.0',
-    port: 4000,
-  },
+  // devServer: {
+  //   host: '0.0.0.0',
+  //   port: 4000,
+  // },
 
   devtools: { enabled: true },
 
@@ -28,8 +28,6 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@vee-validate/nuxt',
   ],
-
-  plugins: ['~/plugins/axios.ts'],
 
   veeValidate: {
     // disable or enable auto imports
@@ -76,19 +74,6 @@ export default defineNuxtConfig({
         login: '/login',
       },
     },
-  },
-
-  vuetify: {
-    /* vuetify options */
-    vuetifyOptions: {
-      // @TODO: list all vuetify options
-    },
-
-    // moduleOptions: {
-    //   styles: {
-    //     configFile: '~/assets/scss/_variables.scss',
-    //   },
-    // },
   },
 
   compatibilityDate: '2024-11-11',

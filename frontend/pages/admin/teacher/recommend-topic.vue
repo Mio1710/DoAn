@@ -4,6 +4,7 @@ import topicStatus from '~/plugins/filters/topic-status'
 import useGetStudentRecommendTopics from '~/composables/teacher/use-get-student-recommend-topic'
 import CreateTopic from '~/components/teacher/topic/molecules/CreateTopic.vue'
 import RejectRecommendTopic from '~/components/teacher/topic/molecules/RejectRecommendTopic.vue'
+import type { APIParams } from '~/types/ResponseTypes'
 
 definePageMeta({
   layout: 'auth',
@@ -31,14 +32,14 @@ const serverOptions = ref({
 })
 
 const queryBuilder = computed(() => ({
-  ...serverOptions.value,
+  query: serverOptions.value
 }))
 
 const queryClient = useQueryClient()
 
 const { $api, $toast } = useNuxtApp()
 
-const { items, isLoading, refetch } = useGetStudentRecommendTopics(queryBuilder)
+const { items, isLoading, execute } = useGetStudentRecommendTopics()
 
 const onReject = (item) => {
   $api.teacher.updateRecommendTopic(item.id, { status: 'rejected' }).then(() => {
@@ -61,7 +62,11 @@ const onSuccess = (item) => {
     <v-card class="pa-3 h-full" color="white" variant="flat">
       <div class="d-flex items-center">
         <v-spacer />
-        <v-btn icon size="x-small" variant="text" @click="refetch()">
+        <v-btn icon size="x-small" variant="text" @click="() => {
+          execute()
+          console.log('refetching...');
+          
+        }">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </div>
@@ -92,7 +97,7 @@ const onSuccess = (item) => {
                   <v-chip color="error" size="small" variant="flat" v-bind="activatorProps">Từ chối</v-chip>
                 </template>
                 <template #default="{ isActive }">
-                  <reject-recommend-topic :item="item" @cancel="isActive.value = false" @success="refetch" />
+                  <reject-recommend-topic :item="item" @cancel="isActive.value = false" @success="execute" />
                 </template>
               </v-dialog>
             </div>

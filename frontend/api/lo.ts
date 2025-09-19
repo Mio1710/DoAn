@@ -1,4 +1,4 @@
-import { BaseApi } from '~/api/base'
+import { BaseApi } from './base'
 export class LOAPI extends BaseApi {
   getLOs(params) {
     return this.get('/los', { params })
