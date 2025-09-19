@@ -3,7 +3,7 @@ import type { APIParams } from '~/types/ResponseTypes'
 
 export default function useGetStudentRecommendTopics(params?: APIParams, options?: any) {
   const { $api } = useNuxtApp()
-  const { data, error, execute, pending } = useAsyncData('getStudentRecommendTopics', () =>
+  const { data, error, execute, pending } = useAsyncData('get-student-recommend-topics', () =>
     $api.teacher.getStudentRecommendTopic()
   )
 
