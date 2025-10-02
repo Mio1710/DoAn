@@ -1,6 +1,6 @@
 import { useNuxtApp } from 'nuxt/app'
+import type { Fetch, FetchError, FetchOptions } from 'ofetch'
 import type { APIParams, BaseResponse, ErrorResponse } from '~/types/ResponseTypes'
-import type { FetchError, Fetch, FetchOptions } from 'ofetch'
 
 export class BaseApi {
   public readonly fetch: Fetch
@@ -16,7 +16,7 @@ export class BaseApi {
 
   public async post(endpoint: string, data?: any, config?: APIParams): Promise<BaseResponse | unknown> {
     try {
-        return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
+      return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
     } catch (error) {
       await this.toastError(error)
     }
@@ -24,7 +24,7 @@ export class BaseApi {
 
   public async postDownload(endpoint: string, data?: any, config?: APIParams): Promise<unknown> {
     try {
-        return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
+      return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
     } catch (error) {
       await this.toastError(error)
     }
@@ -32,7 +32,7 @@ export class BaseApi {
 
   public async put(endpoint: string, data?: any): Promise<unknown> {
     try {
-        return await this.fetch(endpoint, { method: 'PUT', body: data })
+      return await this.fetch(endpoint, { method: 'PUT', body: data })
     } catch (error) {
       await this.toastError(error)
     }
@@ -40,7 +40,7 @@ export class BaseApi {
 
   public async delete(endpoint: string, data?: any): Promise<unknown> {
     try {
-        return await this.fetch(endpoint, { method: 'DELETE', body: data })
+      return await this.fetch(endpoint, { method: 'DELETE', body: data })
     } catch (error) {
       await this.toastError(error)
     }

@@ -1,27 +1,25 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Semester, Student } from 'src/entities';
-import * as bcrypt from 'bcrypt';
-import * as XLSX from 'xlsx';
-import { log } from 'console';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Not, Repository, UpdateResult } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import { log } from 'console';
 import { ClsService } from 'nestjs-cls';
+import { Student } from 'src/entities';
 import { StudentSubject } from 'src/entities/studentSubject.entity';
+import { Not, Repository, UpdateResult } from 'typeorm';
+import * as XLSX from 'xlsx';
 
 @Injectable()
 export class StudentService {
   constructor(
     @InjectRepository(Student)
-    private studentepository: Repository<Student>,
+    private studentRepository: Repository<Student>,
     @InjectRepository(StudentSubject)
     private studentSubjectRepository: Repository<StudentSubject>,
     private cls: ClsService,
-    @InjectRepository(Semester)
-    private readonly semesterRepository: Repository<Semester>,
   ) {}
 
   getLists(options): Promise<Student[]> {
-    return this.studentepository.find({ ...options });
+    return this.studentRepository.find({ ...options });
   }
 
   async create(student): Promise<Student> {
@@ -33,24 +31,24 @@ export class StudentService {
     const saltOrRounds = 10;
     const hash = await bcrypt.hash(student.matkhau, saltOrRounds);
     student.matkhau = hash;
-    return this.studentepository.save(student);
+    return this.studentRepository.save(student);
   }
 
   update(student: Student): Promise<Student> {
-    return this.studentepository.save(student);
+    return this.studentRepository.save(student);
   }
 
   async updateInfo(id: number, body): Promise<UpdateResult> {
     // check if the student exists
     console.log('body info update', body);
 
-    const student = await this.studentepository.findOne({
+    const student = await this.studentRepository.findOne({
       where: { maso: body.maso, id: Not(id) },
     });
     if (student) {
       throw new HttpException('Mã số sinh viên đã tồn tại', 400);
     }
-    return await this.studentepository.update(id, {
+    return await this.studentRepository.update(id, {
       ten: body.ten,
       hodem: body.hodem,
       lop: body.lop,
@@ -61,14 +59,14 @@ export class StudentService {
   }
 
   delete(id: number) {
-    return this.studentepository.softDelete(id);
+    return this.studentRepository.softDelete(id);
   }
 
   async findOne(options): Promise<Student> {
     try {
       console.log('options', options);
 
-      const student = await this.studentepository.findOne({
+      const student = await this.studentRepository.findOne({
         where: { ...options },
       });
       if (!student) {
@@ -81,7 +79,9 @@ export class StudentService {
   }
 
   checkExistStudent(maso: string): Promise<Student> {
-    return this.studentepository.findOne({ where: { maso, deleted_at: null } });
+    return this.studentRepository.findOne({
+      where: { maso, deleted_at: null },
+    });
   }
 
   async import(file, khoa_id): Promise<Student[]> {
@@ -92,15 +92,13 @@ export class StudentService {
       console.log('data ExpressExpressExpress', data);
       const students = await Promise.all(
         data.map(async (student: Student) => {
-          const isExist = await this.checkExistStudent(student.maso);
-
           const saltOrRounds = 10;
           const hash = await bcrypt.hash('12345678', saltOrRounds);
           student.matkhau = hash;
           student.khoa_id = khoa_id;
           console.log('user before create', student);
 
-          return await this.studentepository.save(student);
+          return await this.studentRepository.save(student);
         }),
       );
 

@@ -1,8 +1,8 @@
-import { Command, CommandRunner } from 'nest-commander';
 import { Injectable } from '@nestjs/common';
-import { UserService } from 'src/services'; // Adjust the import according to your service location
 import * as bcrypt from 'bcrypt';
+import { Command, CommandRunner } from 'nest-commander';
 import { CreateUserDTO } from 'src/dtos';
+import { UserService } from 'src/modules/User/user.service';
 
 const saltOrRounds = 10;
 

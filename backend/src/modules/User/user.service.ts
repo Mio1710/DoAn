@@ -4,13 +4,12 @@ import { UserRepository } from 'src/repositories';
 import * as bcrypt from 'bcrypt';
 import * as XLSX from 'xlsx';
 import { CreateUserDTO, ImportUserDto, UpdateTeacherDto } from 'src/dtos';
-import { SemesterService } from './semester.service';
-import { StudentService } from './student.service';
 import { UpdateResult } from 'typeorm';
 import { Response } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { parse } from 'date-fns';
+import { SemesterService, StudentService } from 'src/services';
 
 @Injectable()
 export class UserService {

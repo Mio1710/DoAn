@@ -1,5 +1,5 @@
-import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
+import { DataSource } from 'typeorm';
 
 config();
 
@@ -13,7 +13,7 @@ export default new DataSource({
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
   // synchronize: process.env.NODE_ENV === 'local',
-  logging: true,
+  logging: false,
   migrations: ['./db/migrations/*s{.ts,.js}'],
   migrationsTableName: 'migrations',
 });

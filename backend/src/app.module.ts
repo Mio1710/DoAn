@@ -1,24 +1,26 @@
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { config } from 'dotenv';
+import { CommandRunnerModule } from 'nest-commander';
+import { ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import * as ListRepositories from './repositories';
-import * as ListServices from './services';
+import * as ListCommands from './commands';
+import DatabaseConfig from './configs/database.config';
 import * as ListControllers from './controllers';
 import * as ListEntities from './entities';
-import * as ListCommands from './commands';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import DatabaseConfig from './configs/database.config';
-import { JwtModule } from '@nestjs/jwt';
-import { CommandRunnerModule } from 'nest-commander';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
-import { ClsModule } from 'nestjs-cls';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 import { RequestInterceptor } from './interceptors/request.interceptor';
-import * as ListUtils from './utils';
+import { AuthModule } from './modules/Auth/auth.module';
+import { UserModule } from './modules/User/user.module';
+import * as ListRepositories from './repositories';
+import * as ListServices from './services';
 import { BaseSubscriber } from './subscribers/base.subscribe';
-import { config } from 'dotenv';
-import { CacheModule } from '@nestjs/cache-manager';
+import * as ListUtils from './utils';
 config();
 console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
 
@@ -50,8 +52,11 @@ console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
       },
     }),
     CacheModule.register({
+      isGlobal: true,
       ttl: 360000,
     }),
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController, ...Object.values(ListControllers)],
   providers: [
