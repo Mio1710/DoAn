@@ -12,7 +12,8 @@ import { Roles } from 'src/decorators/role.decorator';
 import { CreateUserDTO } from 'src/dtos';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
-import { FacultyService, UserService } from 'src/services';
+import { UserService } from 'src/modules/User/user.service';
+import { FacultyService } from 'src/services';
 import { ResponseUtils } from 'src/utils/response.util';
 
 @Controller('super-admin')

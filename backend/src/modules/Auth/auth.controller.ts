@@ -11,6 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { Response } from 'express';
 import {
   ChangePasswordDto,
   CreateUserDTO,
@@ -19,22 +20,23 @@ import {
 } from 'src/dtos';
 import { User } from 'src/entities';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { UserService } from 'src/modules/User/user.service';
-import { AuthService } from 'src/services/auth.service';
+import { GoogleOauthGuard } from 'src/guards/google-oauth.guard';
 import { ResponseUtils } from 'src/utils';
+import { UserService } from '../User/user.service';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 @UsePipes(ValidationPipe)
 export class AuthController {
   constructor(
     private readonly userService: UserService,
-    private readonly authServeice: AuthService,
+    private readonly authService: AuthService,
     private readonly responseUtils: ResponseUtils,
   ) {}
 
   @Post('login')
   async login(@Body() body: SingInDto): Promise<any> {
-    const data = await this.authServeice.signIn(
+    const data = await this.authService.signIn(
       body.maso,
       body.matkhau,
       body.type,
@@ -46,7 +48,7 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('profile')
   async getProfile(@Request() req) {
-    return this.authServeice.getProfile(req.user);
+    return this.authService.getProfile(req.user);
   }
 
   @Get('init-admin')
@@ -73,19 +75,42 @@ export class AuthController {
     @Req() req,
   ): Promise<any> {
     const user = req.user;
-    return await this.authServeice.changePassword(user, body);
+    return await this.authService.changePassword(user, body);
   }
 
   @Post('logout')
   logout() {
-    return this.authServeice.logout();
+    return this.authService.logout();
   }
 
   @UseGuards(AuthGuard)
   @Put('profile')
   async updateProfile(@Body() body: UpdateProfileDto, @Res() res, @Req() req) {
     const user = req.user;
-    const data = await this.authServeice.updateProfile(user, body);
+    const data = await this.authService.updateProfile(user, body);
     return this.responseUtils.success({ data }, res);
+  }
+
+  @Get('google')
+  @UseGuards(GoogleOauthGuard)
+  async googleAuth() {
+    // initiates the Google OAuth2 login flow
+  }
+
+  @Get('google/callback')
+  @UseGuards(GoogleOauthGuard)
+  async googleAuthCallback(@Req() req, @Res() res: Response) {
+    try {
+      const token = await this.authService.signInWithGoogle(req.user);
+      res
+        .cookie('auth.token', token, {
+          secure: true,
+        })
+        .redirect(`http://localhost:4000`);
+    } catch (error) {
+      console.log('Error during Google auth callback: ', error);
+
+      res.redirect(`http://localhost:4000/login?error=${error.message}`);
+    }
   }
 }

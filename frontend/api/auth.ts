@@ -7,4 +7,8 @@ export class AuthApi extends BaseApi {
   updateProfile(data: any) {
     return this.put('/auth/profile', data)
   }
+
+  getProfile() {
+    return this.get('/auth/profile')
+  }
 }

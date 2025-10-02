@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   ssr: false,
@@ -46,9 +46,7 @@ export default defineNuxtConfig({
         transformAssetUrls,
       },
     },
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
 
   auth: {

@@ -17,10 +17,29 @@
           <app-text-field v-model="form.maso" class="mb-5" label="Mã số" name="Mã số" rules="required" />
           <app-password v-model="form.matkhau" label="Mật khẩu" name="Mật khẩu" rules="required" type="password" />
           <v-checkbox v-model="form.type" label="Bạn là giáo viên" name="Bạn là giáo viên" value="teacher" />
-          <v-btn block color="success" :loading="loading" size="large" variant="elevated" @click="handleSubmit(onSubmit)">
+          <v-btn
+            block
+            color="success"
+            :loading="loading"
+            size="large"
+            variant="elevated"
+            @click="handleSubmit(onSubmit)"
+          >
             Sign In
           </v-btn>
         </app-form>
+        <div class="text-center">or</div>
+        <v-btn
+          block
+          color="info"
+          size="large"
+          variant="outlined"
+          href="http://localhost:3000/api/auth/google"
+          class="!rounded-full"
+        >
+          <v-avatar image="/google.png" size="20" class="mr-2"></v-avatar>
+          Sign in with Google
+        </v-btn>
       </v-card>
     </div>
   </div>
@@ -28,21 +47,30 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import AppPassword from '~/components/common/atoms/AppPassword.vue'
 import AppTextField from '~/components/common/atoms/AppTextField.vue'
 import AppForm from '~/components/common/molecules/AppForm.vue'
-import AppPassword from '~/components/common/atoms/AppPassword.vue'
 const form = reactive({
   maso: '',
   matkhau: '',
   type: null,
 })
 const loading = ref(false)
-const { signIn } = useAuth()
+const { signIn, getSession } = useAuth()
 const { $toast } = useNuxtApp()
+
+const route = useRoute()
+
+const errorMessage = route.query.error
+if (errorMessage) {
+  console.log('Login errorMessage from query: ', errorMessage)
+  $toast.error(errorMessage)
+}
+
 const onSubmit = () => {
   loading.value = true
-  console.log('Click submit', form);
-  
+  console.log('Click submit', form)
+
   signIn(form, {
     callbackUrl: '/',
     redirect: true,

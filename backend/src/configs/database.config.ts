@@ -13,7 +13,7 @@ export default registerAs('database', () => ({
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
   // synchronize: process.env.NODE_ENV === 'local',
-  logging: true,
+  logging: false,
   migrations: [`${__dirname}/../../db/migrations/*s{.ts,.js}`],
   migrationsTableName: 'migrations',
   autoLoadEntities: true,
