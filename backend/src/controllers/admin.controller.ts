@@ -24,12 +24,9 @@ import {
 } from 'src/dtos';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
+import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { UserService } from 'src/modules/User/user.service';
-import {
-  StudentInternService,
-  StudentService,
-  StudentTopicService,
-} from 'src/services';
+import { StudentInternService, StudentService } from 'src/services';
 import { ResponseUtils } from 'src/utils/response.util';
 
 @Controller('admin')

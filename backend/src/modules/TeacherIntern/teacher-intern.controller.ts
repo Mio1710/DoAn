@@ -1,30 +1,28 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Res,
-  Body,
   Param,
-  UseGuards,
+  Post,
   Put,
-  Req,
   Query,
+  Req,
+  Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateInternDto } from 'src/dtos';
 import { Intern } from 'src/entities';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
-import { TeacherInternService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
-// import { UserService } from '../services/user.service';
+import { TeacherInternService } from './teacher-intern.service';
 
 @Controller('teacher-interns')
 @UseGuards(AuthGuard, RolesGuard)
 export class TeacherInternController {
   constructor(
     private readonly teacherInternService: TeacherInternService,
-    // private readonly userService: UserService,
     private readonly responseUtils: ResponseUtils,
   ) {}
 
@@ -37,19 +35,20 @@ export class TeacherInternController {
     if (query?.semester_id) {
       options['semester_id'] = query.semester_id;
     }
-
-    if (query.filter.status) {
-      //set filter to object
-      console.log('status neffffff', query.filter.status);
+    if (query.filter?.status) {
       options['status'] = query.filter.status;
     }
-    
+
     const data = await this.teacherInternService.getLists(options);
     return this.responseUtils.success({ data }, res);
   }
 
   @Post()
-  async createTeacherIntern(@Body() intern: CreateInternDto, @Res() res, @Req() req) {
+  async createTeacherIntern(
+    @Body() intern: CreateInternDto,
+    @Res() res,
+    @Req() req,
+  ) {
     const khoa_id = req.user.khoa_id;
     const student_intern_id = req.user.id;
     const data = await this.teacherInternService.create({

@@ -1,9 +1,9 @@
-import { Entity, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
-import { Faculty } from './faculty.entity';
+import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { StudentTopic } from './student-topic.entity';
-import { StudentIntern } from './student-intern.entity';
+import { Faculty } from './faculty.entity';
 import { Group } from './group.entity';
+import { StudentIntern } from './student-intern.entity';
 // import { Intern } from './intern.entity';
 
 @Entity('student')

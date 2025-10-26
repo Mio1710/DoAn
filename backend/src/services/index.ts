@@ -9,7 +9,5 @@ export * from './report-topic.service';
 export * from './result.service';
 export * from './semester.service';
 export * from './student-intern.service';
-export * from './student-topic.service';
 export * from './super-teacher.service';
 export * from './teacher-group.service';
-export * from './teacher-intern.service';

@@ -29,14 +29,12 @@ export class TopicController {
 
   @Get()
   async getListTopics(@Res() res, @Req() req, @Query() query?) {
-    console.log('params1111', query.filter);
     const khoa_id = req.user.khoa_id;
     const viewAll = query.filter?.viewAll == 'true' ? true : false;
     const options = { khoa_id, viewAll };
     if (query?.semester_id) {
       options['semester_id'] = query.semester_id;
     }
-
     if (query.filter?.status) {
       options['status'] = query.filter.status;
     }
@@ -54,24 +52,18 @@ export class TopicController {
       khoa_id,
       teacher_id,
     });
-    console.log('topic data create', data);
     return this.responseUtils.success({ data }, res);
   }
 
   @Get('registed')
   async getTopicRegistedDetail(@Res() res) {
     const data = await this.topicService.getRegistedDetail();
-    console.log('topic data', data);
-
     return this.responseUtils.success({ data }, res);
   }
 
   @Get(':id')
   async getTopicById(@Param() id: number, @Res() res) {
-    console.log('topic id', id);
-
     const data = await this.topicService.findOne({ id });
-    console.log('topic data', data);
     return this.responseUtils.success({ data }, res);
   }
 
@@ -93,10 +85,7 @@ export class TopicController {
     @Param('status') status: string,
     @Res() res,
   ) {
-    console.log('topic id', id);
-
     const data = await this.topicService.checkTopic(id, status);
-    console.log('topic data', data);
     return this.responseUtils.success({ data }, res);
   }
 

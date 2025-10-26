@@ -16,6 +16,9 @@ import * as ListEntities from './entities';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthModule } from './modules/Auth/auth.module';
+import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
+import { StudentTopicModule } from './modules/StudentTopic/student-topic.module';
+import { TeacherInternModule } from './modules/TeacherIntern/teacher-inter.module';
 import { Topic } from './modules/Topic/entities/topic.entity';
 import { TopicController } from './modules/Topic/topic.controller';
 import { TopicModule } from './modules/Topic/topic.module';
@@ -34,7 +37,11 @@ console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
       cache: true,
       load: [DatabaseConfig],
     }),
-    TypeOrmModule.forFeature([...Object.values(ListEntities), Topic]),
+    TypeOrmModule.forFeature([
+      ...Object.values(ListEntities),
+      Topic,
+      StudentTopic,
+    ]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -56,11 +63,13 @@ console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
     }),
     CacheModule.register({
       isGlobal: true,
-      ttl: 360000,
+      ttl: 3600000,
     }),
     AuthModule,
     UserModule,
     TopicModule,
+    TeacherInternModule,
+    StudentTopicModule,
   ],
   controllers: [
     AppController,

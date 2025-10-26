@@ -13,8 +13,6 @@ export * from './result.controller';
 export * from './semester.controller';
 export * from './student-intern.controller';
 export * from './student-teacher.controller';
-export * from './student-topic.controller';
 export * from './super-admin.controller';
 export * from './super-teacher.controller';
 export * from './teacher-group.controller';
-export * from './teacher-intern.controller';

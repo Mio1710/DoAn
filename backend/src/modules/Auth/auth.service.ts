@@ -113,7 +113,7 @@ export class AuthService {
     payload = {
       sub: teacher.maso,
       id: teacher.id,
-      roles: ['teacher'],
+      roles: teacher.roles,
       khoa_id: teacher.khoa_id ?? null,
     };
     const token = await this.jwtService.signAsync(payload);

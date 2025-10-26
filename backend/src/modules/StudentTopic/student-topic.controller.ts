@@ -1,15 +1,14 @@
 import {
+  Body,
   Controller,
   Get,
   Post,
+  Query,
+  Req,
   Res,
-  Body,
-  UseInterceptors,
   UploadedFile,
   UseGuards,
-  Req,
-  Query,
-  HttpException,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Roles } from 'src/decorators/role.decorator';
@@ -18,8 +17,8 @@ import { AllowRegisterGroupGuard } from 'src/guards/allow-register-group.guard';
 import { AllowStudentRegisterTopicGuard } from 'src/guards/allow-student-register-topic.guard';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
-import { StudentTopicService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
+import { StudentTopicService } from './student-topic.service';
 
 @UseGuards(AuthGuard, RolesGuard)
 @Controller('student-topic')

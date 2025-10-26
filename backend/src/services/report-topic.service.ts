@@ -1,12 +1,13 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { ReportTopicDto } from 'src/dtos';
-import { ReportTopic, StudentTopic } from 'src/entities';
-import { Repository, UpdateResult } from 'typeorm';
-import { StudentTopicService } from './student-topic.service';
-import { SemesterService } from './semester.service';
-import * as crypto from 'crypto';
-import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
 import { HttpException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as crypto from 'crypto';
+import { ReportTopicDto } from 'src/dtos';
+import { ReportTopic } from 'src/entities';
+import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
+import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
+import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
+import { Repository, UpdateResult } from 'typeorm';
+import { SemesterService } from './semester.service';
 
 const randomName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 
@@ -16,13 +17,11 @@ export class ReportTopicService {
     private readonly reportTopicRepository: Repository<ReportTopic>,
     private readonly studentTopicService: StudentTopicService,
     private readonly semesterService: SemesterService,
-    // private readonly s3ClientUtils: S3ClientUtil,
   ) {}
 
   async create(reportTopic: ReportTopicDto): Promise<ReportTopic> {
     try {
       const studentTopic = await this.getStudentTopic(reportTopic.student_id);
-      // check if have report with week
       const checkReport = await this.reportTopicRepository.findOne({
         where: { week: reportTopic.week, student_topic_id: studentTopic.id },
       });

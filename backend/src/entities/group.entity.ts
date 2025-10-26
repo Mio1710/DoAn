@@ -1,3 +1,4 @@
+import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import {
   Column,
   Entity,
@@ -7,7 +8,6 @@ import {
   OneToOne,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { StudentTopic } from './student-topic.entity';
 import { Student } from './student.entity';
 import { TeacherGroup } from './teacher_group.entity';
 

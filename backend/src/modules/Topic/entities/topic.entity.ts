@@ -1,5 +1,6 @@
-import { Faculty, StudentTopic, User } from 'src/entities';
+import { Faculty, User } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
+import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import {
   Column,
   DeleteDateColumn,

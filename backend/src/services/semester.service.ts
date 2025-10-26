@@ -1,8 +1,8 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common';
-import { Semester } from 'src/entities';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Cache, CACHE_MANAGER } from '@nestjs/cache-manager';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Semester } from 'src/entities';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SemesterService {

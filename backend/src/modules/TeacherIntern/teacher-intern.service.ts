@@ -1,14 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Semester, Intern } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { ClsService } from 'nestjs-cls';
+import { Intern, InternSemester, Semester } from 'src/entities';
 import { ListInternQuery } from 'src/interfaces/queries/listIntern.interface';
-import { SemesterService } from './semester.service';
-import { InternSemester } from '../entities';
-import { CreateInternDto } from 'src/dtos/intern.dto';
-import { User } from '../entities/user.entity';
-// import { UserService } from './user.service';
+import { SemesterService } from 'src/services';
+import { Repository } from 'typeorm';
+
 @Injectable()
 export class TeacherInternService {
   constructor(
@@ -21,15 +18,9 @@ export class TeacherInternService {
     @InjectRepository(InternSemester)
     private readonly internSemesterRepository: Repository<InternSemester>,
 
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-
-    // private readonly userService: UserService,
-
     private readonly semesterService: SemesterService,
     private readonly cls: ClsService,
   ) {}
-
 
   async getLists(options?: ListInternQuery): Promise<Intern[]> {
     let semester_id = options?.semester_id;
@@ -40,8 +31,6 @@ export class TeacherInternService {
       const semester = await this.semesterService.getActiveSemester();
       semester_id = semester.id;
     }
-    console.log('semester_id', semester_id, khoa_id, options, viewAll);
-
     // select information
     const query = this.teacherInternRepository
       .createQueryBuilder('intern')
@@ -66,7 +55,7 @@ export class TeacherInternService {
         'student.maso',
         'user.id',
         'user.hodem',
-        'user.ten'
+        'user.ten',
       ]);
 
     // add condition
@@ -74,7 +63,7 @@ export class TeacherInternService {
       .where('semester.semester_id = :semester_id', { semester_id })
       .andWhere('intern.khoa_id = :khoa_id', { khoa_id });
 
-     //Lấy danh sách thực tập theo giảng viên được đăng ký
+    //Lấy danh sách thực tập theo giảng viên được đăng ký
     query.andWhere('intern.teacher_id = :userID', { userID });
 
     if (!viewAll) {
@@ -132,7 +121,9 @@ export class TeacherInternService {
   async checkTeacherIntern(id: number, status: string) {
     console.log('check id', id, status);
 
-    const intern = await this.teacherInternRepository.findOne({ where: { id } });
+    const intern = await this.teacherInternRepository.findOne({
+      where: { id },
+    });
     if (intern.status === 'pending') {
       console.log('intern before', intern, status);
       intern.status = status;
@@ -177,7 +168,9 @@ export class TeacherInternService {
 
   async resetIntern(khoa_id: number) {
     // get all current interns
-    const interns = await this.teacherInternRepository.find({ where: { khoa_id } });
+    const interns = await this.teacherInternRepository.find({
+      where: { khoa_id },
+    });
 
     // soft delete all intern of khoa
     await this.teacherInternRepository
@@ -227,7 +220,9 @@ export class TeacherInternService {
 
     // add intern semester
     const currentSemester = await this.semesterService.getActiveSemester();
-    const newInterns = await this.teacherInternRepository.find({ where: { khoa_id } });
+    const newInterns = await this.teacherInternRepository.find({
+      where: { khoa_id },
+    });
     return await this.internSemesterRepository
       .createQueryBuilder()
       .insert()
@@ -239,6 +234,5 @@ export class TeacherInternService {
         })),
       )
       .execute();
-
   }
 }

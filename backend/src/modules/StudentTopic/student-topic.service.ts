@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { forwardRef, HttpException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
@@ -7,11 +7,12 @@ import { log } from 'console';
 import { parse } from 'date-fns';
 import { Response } from 'express';
 import { ImportStudentDto } from 'src/dtos';
-import { Group, Student, StudentTopic } from 'src/entities';
-import { Topic } from 'src/modules/Topic/entities/topic.entity';
+import { Group, Student } from 'src/entities';
+import { SemesterService } from 'src/services';
 import { Repository, UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
-import { SemesterService } from './semester.service';
+import { Topic } from '../Topic/entities/topic.entity';
+import { StudentTopic } from './entities/student-topic.entity';
 
 @Injectable()
 export class StudentTopicService {
@@ -28,13 +29,12 @@ export class StudentTopicService {
     @InjectRepository(Topic)
     private readonly topicRepository: Repository<Topic>,
 
+    @Inject(forwardRef(() => SemesterService))
     private readonly semesterService: SemesterService,
   ) {}
 
   async getLists(khoa_id, query): Promise<Student[]> {
     const semester = await this.semesterService.getActiveSemester();
-
-    console.log('options1111', query);
 
     const queryBuilder = this.studentRepository
       .createQueryBuilder('students')
