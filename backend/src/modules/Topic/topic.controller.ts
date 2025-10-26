@@ -1,23 +1,23 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Res,
   Body,
-  Param,
-  UseGuards,
-  Put,
-  Req,
-  Query,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  Req,
+  Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateTopicDto } from 'src/dtos';
-import { Topic } from 'src/entities';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
-import { TopicService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
+import { Topic } from './entities/topic.entity';
+import { TopicService } from './topic.service';
 
 @Controller('topics')
 @UseGuards(AuthGuard, RolesGuard)
@@ -37,9 +37,7 @@ export class TopicController {
       options['semester_id'] = query.semester_id;
     }
 
-    if (query.filter.status) {
-      //set filter to object
-      console.log('status neffffff', query.filter.status);
+    if (query.filter?.status) {
       options['status'] = query.filter.status;
     }
 

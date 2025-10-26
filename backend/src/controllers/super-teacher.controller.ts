@@ -13,7 +13,8 @@ import { Roles } from 'src/decorators/role.decorator';
 import { CreateTopicBySubjectDto } from 'src/dtos';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RolesGuard } from 'src/guards/roles.guard';
-import { SuperTeacherService, TopicService } from 'src/services';
+import { TopicService } from 'src/modules/Topic/topic.service';
+import { SuperTeacherService } from 'src/services';
 import { ResponseUtils } from 'src/utils/response.util';
 
 @Controller('super-teacher')

@@ -1,10 +1,12 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Semester, Topic, TopicSemester } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
 import { ClsService } from 'nestjs-cls';
+import { Semester } from 'src/entities';
 import { ListTopicQuery } from 'src/interfaces/queries/listTopic.interface';
-import { SemesterService } from './semester.service';
+import { SemesterService } from 'src/services';
+import { Repository, UpdateResult } from 'typeorm';
+import { TopicSemester } from './entities/topic-semester.entity';
+import { Topic } from './entities/topic.entity';
 
 @Injectable()
 export class TopicService {

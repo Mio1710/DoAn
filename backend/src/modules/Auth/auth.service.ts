@@ -103,31 +103,11 @@ export class AuthService {
 
   // This function just apply for teacher
   async signInWithGoogle(user: any): Promise<string> {
-    // Check if this email is teacher or student
-    // If teacher, @teacher.edu.vn. For testing: xxx.work@gmail.com
-    // If not found, create new teacher and continue
     const email = user.email;
     let payload = {};
-    let teacher;
-    try {
-      teacher = await this.getTeacherProfile(email);
-    } catch (error) {}
+    const teacher = await this.getTeacherProfile(email);
     if (!teacher) {
-      //Option 1: throw Error
-      throw new HttpException('You can not login by email', 404);
-
-      // Option 2: create new ( Just apply for others case, such as: common user)
-      // assum maso = xxx in email xxx.work@gmail.com
-      const maso = email.split('@')[0];
-      teacher = await this.userService.create({
-        maso,
-        email,
-        hodem: user.familyName,
-        ten: user.givenName,
-        phone: null,
-        roles: ['teacher'],
-        matkhau: '123123123',
-      });
+      throw new UnauthorizedException('No teacher associated with this email');
     }
 
     payload = {

@@ -1,14 +1,13 @@
 import {
-  Entity,
-  ManyToOne,
-  JoinColumn,
-  PrimaryGeneratedColumn,
   Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Student } from './student.entity';
-import { Topic } from './topic.entity';
-import { Semester } from './semester.entity';
 import { Faculty } from './faculty.entity';
+import { Semester } from './semester.entity';
+import { Student } from './student.entity';
 
 @Entity('student_subject')
 export class StudentSubject {

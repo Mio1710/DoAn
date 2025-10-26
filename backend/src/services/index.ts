@@ -13,4 +13,3 @@ export * from './student-topic.service';
 export * from './super-teacher.service';
 export * from './teacher-group.service';
 export * from './teacher-intern.service';
-export * from './topic.service';

@@ -16,6 +16,9 @@ import * as ListEntities from './entities';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthModule } from './modules/Auth/auth.module';
+import { Topic } from './modules/Topic/entities/topic.entity';
+import { TopicController } from './modules/Topic/topic.controller';
+import { TopicModule } from './modules/Topic/topic.module';
 import { UserModule } from './modules/User/user.module';
 import * as ListRepositories from './repositories';
 import * as ListServices from './services';
@@ -31,7 +34,7 @@ console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
       cache: true,
       load: [DatabaseConfig],
     }),
-    TypeOrmModule.forFeature([...Object.values(ListEntities)]),
+    TypeOrmModule.forFeature([...Object.values(ListEntities), Topic]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -57,8 +60,13 @@ console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
     }),
     AuthModule,
     UserModule,
+    TopicModule,
   ],
-  controllers: [AppController, ...Object.values(ListControllers)],
+  controllers: [
+    AppController,
+    ...Object.values(ListControllers),
+    TopicController,
+  ],
   providers: [
     AppService,
     ...Object.values(ListRepositories),

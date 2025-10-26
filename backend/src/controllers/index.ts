@@ -18,4 +18,3 @@ export * from './super-admin.controller';
 export * from './super-teacher.controller';
 export * from './teacher-group.controller';
 export * from './teacher-intern.controller';
-export * from './topic.controller';

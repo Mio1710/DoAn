@@ -101,12 +101,13 @@ export class AuthController {
   @UseGuards(GoogleOauthGuard)
   async googleAuthCallback(@Req() req, @Res() res: Response) {
     try {
+      const frontend_url = process.env.FRONTEND_URL;
       const token = await this.authService.signInWithGoogle(req.user);
       res
         .cookie('auth.token', token, {
           secure: true,
         })
-        .redirect(`http://localhost:4000`);
+        .redirect(frontend_url);
     } catch (error) {
       console.log('Error during Google auth callback: ', error);
 

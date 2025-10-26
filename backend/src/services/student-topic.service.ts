@@ -1,16 +1,17 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Group, Student, StudentTopic, Topic } from 'src/entities';
-import * as bcrypt from 'bcrypt';
-import * as XLSX from 'xlsx';
-import { log } from 'console';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository, UpdateResult } from 'typeorm';
-import { SemesterService } from './semester.service';
-import { parse } from 'date-fns';
-import { ImportStudentDto } from 'src/dtos';
+import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
+import { log } from 'console';
+import { parse } from 'date-fns';
 import { Response } from 'express';
+import { ImportStudentDto } from 'src/dtos';
+import { Group, Student, StudentTopic } from 'src/entities';
+import { Topic } from 'src/modules/Topic/entities/topic.entity';
+import { Repository, UpdateResult } from 'typeorm';
+import * as XLSX from 'xlsx';
+import { SemesterService } from './semester.service';
 
 @Injectable()
 export class StudentTopicService {

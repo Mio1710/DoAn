@@ -1,7 +1,7 @@
-import { Entity, ManyToOne, JoinColumn, Column } from 'typeorm';
+import { Semester } from 'src/entities';
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { Topic } from './topic.entity';
-import { Semester } from './semester.entity';
-import { BaseEntity } from './base.entity';
 
 @Entity('topic_semester')
 export class TopicSemester extends BaseEntity {

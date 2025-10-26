@@ -1,18 +1,18 @@
+import { Topic } from 'src/modules/Topic/entities/topic.entity';
 import {
-  Entity,
-  ManyToOne,
-  JoinColumn,
   Column,
-  Index,
   DeleteDateColumn,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Student } from './student.entity';
-import { Topic } from './topic.entity';
-import { Semester } from './semester.entity';
 import { BaseEntity } from './base.entity';
 import { Group } from './group.entity';
 import { ReportTopic } from './report-topic.entity';
+import { Semester } from './semester.entity';
+import { Student } from './student.entity';
 
 @Entity('student_topics')
 @Index('IDX_student_semester', ['student_id', 'semester_id', 'deleted_at'], {
