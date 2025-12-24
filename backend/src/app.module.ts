@@ -1,6 +1,6 @@
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,7 +10,8 @@ import { ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import * as ListCommands from './commands';
-import DatabaseConfig from './configs/database.config';
+import databaseConfig from './configs/database.config';
+import { envSchema } from './configs/validation/env_variable';
 import * as ListControllers from './controllers';
 import * as ListEntities from './entities';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
@@ -28,27 +29,21 @@ import * as ListServices from './services';
 import { BaseSubscriber } from './subscribers/base.subscribe';
 import * as ListUtils from './utils';
 config();
-console.log('env', process.env.DB_NAME, process.env.DB_HOST, DatabaseConfig);
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      validationSchema: envSchema,
       isGlobal: true,
       cache: true,
-      load: [DatabaseConfig],
+      load: [databaseConfig],
     }),
     TypeOrmModule.forFeature([
       ...Object.values(ListEntities),
       Topic,
       StudentTopic,
     ]),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        ...configService.get('database'),
-      }),
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRootAsync(databaseConfig.asProvider()),
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
