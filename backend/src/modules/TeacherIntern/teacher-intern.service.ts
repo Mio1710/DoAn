@@ -4,7 +4,7 @@ import { ClsService } from 'nestjs-cls';
 import { Intern, InternSemester, Semester } from 'src/entities';
 import { ListInternQuery } from 'src/interfaces/queries/listIntern.interface';
 import { Repository } from 'typeorm';
-import { SemesterService } from '../Semester/semester.service';
+import { CommonService } from '../common/common.service';
 
 @Injectable()
 export class TeacherInternService {
@@ -18,7 +18,7 @@ export class TeacherInternService {
     @InjectRepository(InternSemester)
     private readonly internSemesterRepository: Repository<InternSemester>,
 
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
     private readonly cls: ClsService,
   ) {}
 
@@ -28,7 +28,7 @@ export class TeacherInternService {
     const viewAll = options?.viewAll ?? false;
     const userID = this.cls.get('userId');
     if (!semester_id) {
-      const semester = await this.semesterService.getActiveSemester();
+      const semester = await this.commonService.getActiveSemester();
       semester_id = semester.id;
     }
     // select information
@@ -84,7 +84,7 @@ export class TeacherInternService {
     console.log('intern data create', data);
 
     // active semester
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
 
     const internSemester = await this.internSemesterRepository.save({
       intern_id: data.id,
@@ -219,7 +219,7 @@ export class TeacherInternService {
       .execute();
 
     // add intern semester
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
     const newInterns = await this.teacherInternRepository.find({
       where: { khoa_id },
     });

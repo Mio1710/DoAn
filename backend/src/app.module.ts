@@ -17,6 +17,7 @@ import * as ListEntities from './entities';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthModule } from './modules/Auth/auth.module';
+import { CommonModule } from './modules/common/common.module';
 import { SemesterModule } from './modules/Semester/semester.module';
 import { SemesterService } from './modules/Semester/semester.service';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
@@ -62,6 +63,7 @@ config();
       isGlobal: true,
       ttl: 3600000,
     }),
+    CommonModule,
     AuthModule,
     UserModule,
     TopicModule,
