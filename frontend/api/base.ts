@@ -1,5 +1,5 @@
 import { useNuxtApp } from 'nuxt/app'
-import type { Fetch, FetchError, FetchOptions } from 'ofetch'
+import type { Fetch } from 'ofetch'
 import type { APIParams, BaseResponse, ErrorResponse } from '~/types/ResponseTypes'
 
 export class BaseApi {
@@ -8,13 +8,15 @@ export class BaseApi {
     this.fetch = fetch
   }
 
-  public async get(endpoint: string, config?: FetchOptions): Promise<unknown> {
-    return await this.fetch(endpoint).catch((error: FetchError) => {
-      this.toastError(error)
-    })
+  public async get<T>(endpoint: string): Promise<BaseResponse<T> | any> {
+    try {
+      return await this.fetch(endpoint, { method: 'GET' })
+    } catch (error) {
+      await this.toastError(error)
+    }
   }
 
-  public async post(endpoint: string, data?: any, config?: APIParams): Promise<BaseResponse | unknown> {
+  public async post<T>(endpoint: string, data?: any, config?: APIParams): Promise<BaseResponse<T> | unknown> {
     try {
       return await this.fetch(endpoint, { method: 'POST', body: data, ...config })
     } catch (error) {

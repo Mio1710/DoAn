@@ -1,8 +1,8 @@
 import { Res } from '@nestjs/common';
 import { HttpStatusCode } from 'axios';
 import { Response } from 'express';
-import { ResponseInterface } from 'src/interfaces';
 import { getStatusCodeMessage } from 'src/constants/http.constants';
+import { ResponseInterface } from 'src/interfaces';
 export class ResponseUtils {
   failed(response: ResponseInterface, @Res() res: Response) {
     const status_code = response.status_code ?? HttpStatusCode.BadRequest;
@@ -18,6 +18,8 @@ export class ResponseUtils {
 
   success(response: any, @Res() res: Response) {
     const status_code = response.status_code ?? HttpStatusCode.Ok;
+    console.log('check', response);
+
     const result = {
       status_code,
       data:

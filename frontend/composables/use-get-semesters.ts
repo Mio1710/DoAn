@@ -1,6 +1,10 @@
-import { computed, type UnwrapRef } from 'vue'
+import { computed } from 'vue'
 import { useQuery } from 'vue-query'
-export default function useGetSemesters(params?: UnwrapRef<any>, options?: any) {
+import type { BaseQuery } from '~/types/query'
+import type { UseQueryResponse } from '~/types/ResponseTypes'
+import type { Semester } from '~/types/semester'
+
+export default function useGetSemesters(params?: BaseQuery, options?: any): UseQueryResponse<Semester> {
   const { $api } = useNuxtApp()
 
   const query = useQuery(

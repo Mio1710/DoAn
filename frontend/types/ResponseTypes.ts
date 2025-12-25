@@ -8,8 +8,8 @@ export interface ApiPaginate {
   total: number
 }
 export interface APIParams {
-  params?: any,
-  query?: any,
+  params?: any
+  query?: any
   responseType?: 'json' | 'blob' | 'text'
 }
 
@@ -27,4 +27,10 @@ type ErrorResponse = {
   fields: Record<string, any>
 }
 
-export type { BaseResponse, ErrorResponse }
+type UseQueryResponse<T> = {
+  items: T[]
+  totalItems: number
+  isLoading: boolean
+  refetch: () => Promise<any>
+}
+export type { BaseResponse, ErrorResponse, UseQueryResponse }

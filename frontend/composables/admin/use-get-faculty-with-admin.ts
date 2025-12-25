@@ -1,7 +1,10 @@
-import { computed, type UnwrapRef } from 'vue'
+import { computed } from 'vue'
 import { useQuery } from 'vue-query'
+import type { Faculty } from '~/types/faculty'
+import type { BaseQuery } from '~/types/query'
+import type { UseQueryResponse } from '~/types/ResponseTypes'
 
-export default function useGetFacultyWithAdmin(params?: UnwrapRef<any>, options?: any) {
+export default function useGetFacultyWithAdmin(params?: BaseQuery, options?: any): UseQueryResponse<Faculty> {
   const { $api } = useNuxtApp()
 
   const query = useQuery(

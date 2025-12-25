@@ -126,7 +126,7 @@ const onSubmit = () => {
 
 .background-image {
   flex: 1;
-  background: url('/images/img_login.png') no-repeat center center;
+  /*background: url('/images/img_login.png') no-repeat center center;*/
   background-size: cover;
   display: flex;
   justify-content: center;

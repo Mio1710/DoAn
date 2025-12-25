@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { useQueryClient } from 'vue-query'
 import { format } from 'date-fns'
-import UpdateSemester from '~/components/admin/semester/molecules/UpdateSemester.vue'
+import { useQueryClient } from 'vue-query'
 import CreateSemester from '~/components/admin/semester/molecules/CreateSemester.vue'
+import UpdateSemester from '~/components/admin/semester/molecules/UpdateSemester.vue'
+import useGetSemesters from '~/composables/use-get-semesters'
+import type { Semester } from '~/types/semester'
+import type { TableHeader } from '~/types/table'
 
 definePageMeta({
   layout: 'auth',
@@ -10,7 +13,8 @@ definePageMeta({
 })
 const isCreate = ref(false)
 const semester = ref('')
-const headers = [
+
+const headers: TableHeader<Semester>[] = [
   {
     title: 'STT',
     align: 'center',
@@ -18,12 +22,12 @@ const headers = [
     key: 'index',
     width: 50,
   },
-  { title: 'Tên kỳ đăng ký', key: 'ten', width: '35%', minWidth: 250 },
+  { title: 'Tên kỳ đăng ký', key: 'name', width: '35%', minWidth: 250 },
   { title: 'Trạng thái', key: 'status', width: '15%', minWidth: 150 },
   { title: 'Thời gian mở', key: 'date', width: '15%', minWidth: 150 },
-  { title: 'Công bố đề tài', key: 'public-topic', width: '15%', minWidth: 150 },
-  { title: 'Đăng ký đề tài', key: 'register-topic', width: '15%', minWidth: 150 },
-  { title: 'Đăng ký nhóm', key: 'register-group', width: '15%', minWidth: 150 },
+  { title: 'Công bố đề tài', key: 'public_topic', width: '15%', minWidth: 150 },
+  { title: 'Đăng ký đề tài', key: 'register_topic', width: '15%', minWidth: 150 },
+  { title: 'Đăng ký nhóm', key: 'register_group', width: '15%', minWidth: 150 },
   { title: 'Bảo vệ', key: 'defense', width: '15%', minWidth: 150 },
   { title: 'Kết quả', key: 'result', width: '15%', minWidth: 150 },
   { title: 'Ghi chú', key: 'note', width: '25%', minWidth: 200 },
@@ -44,7 +48,7 @@ const queryBuilder = computed(() => ({
 const { $api, $toast } = useNuxtApp()
 
 const queryClient = useQueryClient()
-const handleActive = (item) => {
+const handleActive = (item: Semester) => {
   try {
     $api.semester.activeSemester(item.id).then(() => {
       queryClient.invalidateQueries('semester')
@@ -56,13 +60,14 @@ const handleActive = (item) => {
 }
 
 const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
+console.log('Type of items: ', typeof items)
 </script>
 
 <template>
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Tạo đợt đăng ký mới</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
-      <div class="d-flex items-center">
+      <div :class="`d-flex items-center ${items?.length == 0 && 'justify-center h-screen'}`">
         <v-dialog width="600">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
@@ -75,7 +80,7 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
           </template>
         </v-dialog>
       </div>
-      <div class="mt-2">
+      <div v-if="items.length > 0" class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">
           <template #item.index="{ index }">
             <span>{{ index + 1 }}</span>
@@ -95,20 +100,30 @@ const { items, totalItems, isLoading, refetch } = useGetSemesters(queryBuilder)
             <div v-if="item.end_date">{{ format(new Date(item?.end_date), 'dd/MM/yyyy HH:mm') }}</div>
           </template>
           <template #item.public-topic="{ item }">
-            <div v-if="item.start_publish_topic">{{ format(new Date(item?.start_publish_topic), 'dd/MM/yyyy HH:mm') }}</div>
+            <div v-if="item.start_publish_topic">
+              {{ format(new Date(item?.start_publish_topic), 'dd/MM/yyyy HH:mm') }}
+            </div>
             <div class="text-center">-</div>
             <div v-if="item.end_publish_topic">{{ format(new Date(item?.end_publish_topic), 'dd/MM/yyyy HH:mm') }}</div>
           </template>
 
           <template #item.register-topic="{ item }">
-            <div v-if="item.start_register_topic">{{ format(new Date(item?.start_register_topic), 'dd/MM/yyyy HH:mm') }}</div>
+            <div v-if="item.start_register_topic">
+              {{ format(new Date(item?.start_register_topic), 'dd/MM/yyyy HH:mm') }}
+            </div>
             <div class="text-center">-</div>
-            <div v-if="item.end_register_topic">{{ format(new Date(item?.end_register_topic), 'dd/MM/yyyy HH:mm') }}</div>
+            <div v-if="item.end_register_topic">
+              {{ format(new Date(item?.end_register_topic), 'dd/MM/yyyy HH:mm') }}
+            </div>
           </template>
           <template #item.register-group="{ item }">
-            <div v-if="item.start_register_group">{{ format(new Date(item?.start_register_group), 'dd/MM/yyyy HH:mm') }}</div>
+            <div v-if="item.start_register_group">
+              {{ format(new Date(item?.start_register_group), 'dd/MM/yyyy HH:mm') }}
+            </div>
             <div class="text-center">-</div>
-            <div v-if="item.end_register_group">{{ format(new Date(item?.end_register_group), 'dd/MM/yyyy HH:mm') }}</div>
+            <div v-if="item.end_register_group">
+              {{ format(new Date(item?.end_register_group), 'dd/MM/yyyy HH:mm') }}
+            </div>
           </template>
           <template #item.defense="{ item }">
             <div v-if="item.start_defense">{{ format(new Date(item?.start_defense), 'dd/MM/yyyy HH:mm') }}</div>

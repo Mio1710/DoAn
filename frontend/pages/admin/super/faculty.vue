@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import { useQueryClient } from 'vue-query'
 import CreateFaculty from '~/components/admin/super/molecules/CreateFaculty.vue'
+import DeleteFacultyConfirmDialog from '~/components/admin/super/molecules/DeleteFacultyConfirmDialog.vue'
+import ListSuperTeacher from '~/components/admin/super/molecules/ListSuperTeacher.vue'
 import UpdateFaculty from '~/components/admin/super/molecules/UpdateFaculty.vue'
 import useGetFacultyWithAdmin from '~/composables/admin/use-get-faculty-with-admin'
-import ListSuperTeacher from '~/components/admin/super/molecules/ListSuperTeacher.vue'
-import DeleteFacultyConfirmDialog from '~/components/admin/super/molecules/DeleteFacultyConfirmDialog.vue'
-import DeleteLOConfirmDialog from '~/components/admin/organisms/DeleteLOConfirmDialog.vue'
+import type { Faculty } from '~/types/faculty'
+import type { TableHeader } from '~/types/table'
 
 definePageMeta({
   layout: 'auth',
   middleware: ['is-super-admin'],
 })
 
-const headers = [
+const headers: TableHeader<Faculty>[] = [
   {
     title: 'STT',
-    align: 'start',
+    align: 'center',
     sortable: false,
     key: 'index',
     width: 30,
   },
-  { title: 'Tên khoa', key: 'ten', minWidth: 250 },
-  { title: 'Mã khoa', key: 'ma_khoa', width: '30%', minWidth: 350 },
+  { title: 'Tên khoa', key: 'name', minWidth: 250 },
+  { title: 'Mã khoa', key: 'code', width: '30%', minWidth: 350 },
   { title: 'Cán bộ khoa', key: 'super_teachers', width: '30%', minWidth: 300, align: 'center' },
   { title: '', key: 'action', width: '10%', minWidth: 100, sortable: false, align: 'center' },
 ]
@@ -44,7 +44,7 @@ const { items, refetch } = useGetFacultyWithAdmin(queryBuilder)
   <div class="d-flex flex-column flex-grow-1 h-full">
     <div class="text-lg font-bold text-uppercase">Quản lý khoa</div>
     <v-card class="pa-3 h-full" color="white" variant="flat">
-      <div class="d-flex items-center">
+      <div :class="`d-flex items-center ${items?.length == 0 && 'justify-center h-screen'}`">
         <v-dialog min-width="400" width="40%">
           <template #activator="{ props: activatorProps }">
             <v-btn color="success" size="small" v-bind="activatorProps">
@@ -56,10 +56,12 @@ const { items, refetch } = useGetFacultyWithAdmin(queryBuilder)
             <create-faculty @cancel="isActive.value = false" />
           </template>
         </v-dialog>
-        <v-spacer />
-        <v-btn icon size="x-small" variant="text" @click="refetch()">
-          <v-icon>mdi-refresh</v-icon>
-        </v-btn>
+        <template v-if="items?.length > 0">
+          <v-spacer />
+          <v-btn icon size="x-small" variant="text" @click="refetch()">
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+        </template>
       </div>
       <div class="mt-2">
         <v-data-table :headers="headers" hide-default-footer :items="items">

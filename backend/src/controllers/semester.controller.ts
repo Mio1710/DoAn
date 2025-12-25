@@ -39,7 +39,7 @@ export class SemesterController {
 
   @Get('active')
   async getActiveSemester(@Res() res) {
-    const data = await this.semesterService.getActiveSemester();
+    const data = (await this.semesterService.getActiveSemester()) ?? {};
     return this.responseUtils.success({ data }, res);
   }
 

@@ -1,10 +1,11 @@
+import type { Semester } from '~/types/semester'
 import { BaseApi } from './base'
 export class SemesterAPI extends BaseApi {
-  getSemesters(params) {
-    return this.get('/semesters', { params })
+  async getSemesters(): Promise<Semester[]> {
+    return await this.get<Semester[]>('/semesters')
   }
 
-  getSemester(id) {
+  getSemester(id: number) {
     return this.get(`/semesters/${id}`)
   }
 

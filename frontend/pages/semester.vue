@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { format } from 'date-fns'
 import useGetCurrentSemesters from '~/composables/use-get-current-semesters'
 
 definePageMeta({
@@ -12,7 +11,15 @@ const { items } = useGetCurrentSemesters()
   <v-card class="w-100 px-6 py-4">
     <div class="text-lg font-bold text-uppercase">Thông tin học kỳ hiện tại</div>
     <div class="h-full d-flex">
-      <div v-if="items" class="d-flex flex-wrap h-1/2 ma-auto">
+      <div v-if="!items.ten" class="ma-auto">
+        <div>There is no semester. Please create one!</div>
+        <div class="text-center">
+          <nuxt-link to="/admin/super/semester" class="text-decoration-none">
+            <v-btn color="primary" class="mt-4">Tạo học kỳ mới</v-btn>
+          </nuxt-link>
+        </div>
+      </div>
+      <div v-else class="d-flex flex-wrap h-1/2 ma-auto">
         <div class="w-1/2 md:w-full min-w-[500px]">
           <span class="font-weight-bold mr-2">Tên học kỳ:</span>
           <span>{{ items.ten }}</span>
