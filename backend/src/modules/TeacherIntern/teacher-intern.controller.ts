@@ -13,8 +13,8 @@ import {
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateInternDto } from 'src/dtos';
 import { Intern } from 'src/entities';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { ResponseUtils } from 'src/utils';
 import { TeacherInternService } from './teacher-intern.service';
 

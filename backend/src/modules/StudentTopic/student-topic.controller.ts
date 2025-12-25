@@ -13,10 +13,10 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateStudentDto, UpdateStudentTopicDto } from 'src/dtos';
-import { AllowRegisterGroupGuard } from 'src/guards/allow-register-group.guard';
-import { AllowStudentRegisterTopicGuard } from 'src/guards/allow-student-register-topic.guard';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AllowRegisterGroupGuard } from 'src/modules/Auth/guards/allow-register-group.guard';
+import { AllowStudentRegisterTopicGuard } from 'src/modules/Auth/guards/allow-student-register-topic.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { ResponseUtils } from 'src/utils';
 import { StudentTopicService } from './student-topic.service';
 

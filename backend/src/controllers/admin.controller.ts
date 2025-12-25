@@ -22,8 +22,8 @@ import {
   StudentInternInfoDto,
   UpdateTeacherDto,
 } from 'src/dtos';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { UserService } from 'src/modules/User/user.service';
 import { StudentInternService, StudentService } from 'src/services';

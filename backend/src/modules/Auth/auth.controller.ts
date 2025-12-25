@@ -19,11 +19,11 @@ import {
   UpdateProfileDto,
 } from 'src/dtos';
 import { User } from 'src/entities';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { GoogleOauthGuard } from 'src/guards/google-oauth.guard';
 import { ResponseUtils } from 'src/utils';
 import { UserService } from '../User/user.service';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { GoogleOauthGuard } from './guards/google-oauth.guard';
 
 @Controller('auth')
 @UsePipes(ValidationPipe)

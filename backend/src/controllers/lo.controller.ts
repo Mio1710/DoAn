@@ -1,20 +1,20 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Res,
   Body,
+  Controller,
+  Delete,
+  Get,
   Param,
-  UseGuards,
+  Post,
   Put,
   Req,
-  Delete,
+  Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateLODto } from 'src/dtos';
 import { LO } from 'src/entities';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { LOService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 

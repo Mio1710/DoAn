@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Semester, Student, StudentSubject } from 'src/entities';
-import { GoogleStrategy } from 'src/guards/strategy/google.strategy';
+import { GoogleStrategy } from 'src/modules/Auth/guards/strategy/google.strategy';
 import { SemesterService, StudentService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 import { AuthService } from '../Auth/auth.service';

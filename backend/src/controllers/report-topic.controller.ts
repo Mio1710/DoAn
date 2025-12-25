@@ -16,8 +16,8 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ReportTopicDto, UpdateReportTopicDto } from 'src/dtos';
-import { AllowReportTopicGuard } from 'src/guards/allow-report-topic.guard';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AllowReportTopicGuard } from 'src/modules/Auth/guards/allow-report-topic.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { ReportTopicService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 import * as stream from 'stream';

@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateRecommendTopicDto } from 'src/dtos';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RecommendTopicService } from 'src/services/recommend-topic.service';
 import { ResponseUtils } from 'src/utils';
 

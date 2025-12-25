@@ -1,19 +1,19 @@
 import {
+  Body,
   Controller,
   Get,
+  Param,
   Post,
+  Req,
   Res,
-  Body,
-  UseInterceptors,
   UploadedFile,
   UseGuards,
-  Req,
-  Param,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateStudentDto, UpdateStudentInternDto } from 'src/dtos';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { StudentInternService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 

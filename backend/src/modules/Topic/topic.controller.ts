@@ -13,8 +13,8 @@ import {
 } from '@nestjs/common';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateTopicDto } from 'src/dtos';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { ResponseUtils } from 'src/utils';
 import { Topic } from './entities/topic.entity';
 import { TopicService } from './topic.service';

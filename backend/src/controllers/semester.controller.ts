@@ -1,17 +1,17 @@
 import {
+  Body,
   Controller,
   Get,
-  Post,
-  Res,
-  Body,
   Param,
-  UseGuards,
+  Post,
   Put,
+  Res,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateSemesterDto } from 'src/dtos';
 import { Semester } from 'src/entities';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { RolesGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
+import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { SemesterService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 
