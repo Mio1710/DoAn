@@ -17,6 +17,8 @@ import * as ListEntities from './entities';
 import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthModule } from './modules/Auth/auth.module';
+import { SemesterModule } from './modules/Semester/semester.module';
+import { SemesterService } from './modules/Semester/semester.service';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicModule } from './modules/StudentTopic/student-topic.module';
 import { TeacherInternModule } from './modules/TeacherIntern/teacher-inter.module';
@@ -65,6 +67,7 @@ config();
     TopicModule,
     TeacherInternModule,
     StudentTopicModule,
+    SemesterModule,
   ],
   controllers: [
     AppController,
@@ -83,6 +86,7 @@ config();
       useClass: RequestInterceptor,
     },
     BaseSubscriber,
+    SemesterService,
   ],
 })
 export class AppModule {}

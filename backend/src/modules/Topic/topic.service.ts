@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ClsService } from 'nestjs-cls';
 import { Semester } from 'src/entities';
 import { ListTopicQuery } from 'src/interfaces/queries/listTopic.interface';
-import { SemesterService } from 'src/services';
 import { Repository, UpdateResult } from 'typeorm';
+import { SemesterService } from '../Semester/semester.service';
 import { TopicSemester } from './entities/topic-semester.entity';
 import { Topic } from './entities/topic.entity';
 

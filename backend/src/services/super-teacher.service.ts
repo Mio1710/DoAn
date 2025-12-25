@@ -1,9 +1,9 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group, Student } from 'src/entities';
+import { SemesterService } from 'src/modules/Semester/semester.service';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { FindOptionsWhere, IsNull, Repository } from 'typeorm';
-import { SemesterService } from './semester.service';
 
 @Injectable()
 export class SuperTeacherService {

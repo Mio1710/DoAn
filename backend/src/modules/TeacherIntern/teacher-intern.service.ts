@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ClsService } from 'nestjs-cls';
 import { Intern, InternSemester, Semester } from 'src/entities';
 import { ListInternQuery } from 'src/interfaces/queries/listIntern.interface';
-import { SemesterService } from 'src/services';
 import { Repository } from 'typeorm';
+import { SemesterService } from '../Semester/semester.service';
 
 @Injectable()
 export class TeacherInternService {

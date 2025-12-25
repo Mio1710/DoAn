@@ -1,4 +1,4 @@
-import { forwardRef, HttpException, Inject, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
@@ -8,9 +8,9 @@ import { parse } from 'date-fns';
 import { Response } from 'express';
 import { ImportStudentDto } from 'src/dtos';
 import { Group, Student } from 'src/entities';
-import { SemesterService } from 'src/services';
 import { Repository, UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
+import { SemesterService } from '../Semester/semester.service';
 import { Topic } from '../Topic/entities/topic.entity';
 import { StudentTopic } from './entities/student-topic.entity';
 
@@ -29,7 +29,7 @@ export class StudentTopicService {
     @InjectRepository(Topic)
     private readonly topicRepository: Repository<Topic>,
 
-    @Inject(forwardRef(() => SemesterService))
+    @Inject(SemesterService)
     private readonly semesterService: SemesterService,
   ) {}
 

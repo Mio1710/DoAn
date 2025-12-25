@@ -1,14 +1,12 @@
+import { HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as crypto from 'crypto';
 import { ReportInternDto } from 'src/dtos';
 import { ReportIntern, StudentIntern } from 'src/entities';
+import { SemesterService } from 'src/modules/Semester/semester.service';
+import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
 import { Repository, UpdateResult } from 'typeorm';
 import { StudentInternService } from './student-intern.service';
-import { SemesterService } from './semester.service';
-import * as crypto from 'crypto';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
-import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
-import { HttpException } from '@nestjs/common';
-
 
 const randomName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 
@@ -23,7 +21,9 @@ export class ReportInternService {
 
   async create(reportIntern: ReportInternDto): Promise<ReportIntern> {
     try {
-      const studentIntern = await this.getStudentIntern(reportIntern.student_id);
+      const studentIntern = await this.getStudentIntern(
+        reportIntern.student_id,
+      );
       // check if have report with week
       const checkReport = await this.reportInternRepository.findOne({
         where: { week: reportIntern.week, student_intern_id: studentIntern.id },
@@ -61,7 +61,7 @@ export class ReportInternService {
     const studentId = options.student_id;
     const studentIntern = await this.getStudentIntern(studentId);
     console.log('studentIntern', studentId, studentIntern);
-    
+
     return await this.reportInternRepository.find({
       where: { student_intern_id: studentIntern.id },
       order: { created_at: 'DESC' },
@@ -72,10 +72,12 @@ export class ReportInternService {
     return await this.reportInternRepository.findOne({ ...options });
   }
 
-
-  async commentReportIntern(id: number, comment: string): Promise<UpdateResult> {
+  async commentReportIntern(
+    id: number,
+    comment: string,
+  ): Promise<UpdateResult> {
     console.log('commentcomment', comment);
-    
+
     return await this.reportInternRepository
       .createQueryBuilder()
       .update()
@@ -84,7 +86,10 @@ export class ReportInternService {
       .execute();
   }
 
-  async update(id: number, reportIntern: ReportInternDto): Promise<UpdateResult> {
+  async update(
+    id: number,
+    reportIntern: ReportInternDto,
+  ): Promise<UpdateResult> {
     const data = {};
     console.log('id', id);
 
@@ -105,7 +110,6 @@ export class ReportInternService {
       .where({ id })
       .execute();
   }
-
 
   async delete(id: number) {
     return await this.reportInternRepository.softDelete(id);

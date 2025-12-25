@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Intern, InternSemester, Semester } from 'src/entities';
-import { SemesterService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
+import { SemesterService } from '../Semester/semester.service';
 import { UserModule } from '../User/user.module';
 import { TeacherInternController } from './teacher-intern.controller';
 import { TeacherInternService } from './teacher-intern.service';

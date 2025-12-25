@@ -1,9 +1,9 @@
-import { TeacherGroupCreateDto } from 'src/dtos/teacher-group.dto';
-import { TeacherGroup, TeacherGroupMember, User } from 'src/entities';
-import { Repository } from 'typeorm';
-import { SemesterService } from './semester.service';
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { TeacherGroupCreateDto } from 'src/dtos/teacher-group.dto';
+import { TeacherGroup, TeacherGroupMember, User } from 'src/entities';
+import { SemesterService } from 'src/modules/Semester/semester.service';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TeacherGroupSerivce {

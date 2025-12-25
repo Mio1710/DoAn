@@ -1,15 +1,16 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { Student, User } from 'src/entities';
-import { UserRepository } from 'src/repositories';
 import * as bcrypt from 'bcrypt';
-import * as XLSX from 'xlsx';
-import { CreateUserDTO, ImportUserDto, UpdateTeacherDto } from 'src/dtos';
-import { UpdateResult } from 'typeorm';
-import { Response } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { parse } from 'date-fns';
-import { SemesterService, StudentService } from 'src/services';
+import { Response } from 'express';
+import { CreateUserDTO, ImportUserDto, UpdateTeacherDto } from 'src/dtos';
+import { Student, User } from 'src/entities';
+import { UserRepository } from 'src/repositories';
+import { StudentService } from 'src/services';
+import { UpdateResult } from 'typeorm';
+import * as XLSX from 'xlsx';
+import { SemesterService } from '../Semester/semester.service';
 
 @Injectable()
 export class UserService {

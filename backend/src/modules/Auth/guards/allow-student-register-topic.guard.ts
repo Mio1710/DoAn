@@ -1,14 +1,13 @@
 import { CanActivate, HttpException, Injectable } from '@nestjs/common';
-import { SemesterService } from 'src/services';
 
 @Injectable()
 export class AllowStudentRegisterTopicGuard implements CanActivate {
-  constructor(private readonly semesterService: SemesterService) {}
+  // constructor(private readonly semesterService: SemesterService) {}
 
   async canActivate(): Promise<boolean> {
     try {
-      const isAllowRegisterTopic =
-        await this.semesterService.allowRegisterTopic();
+      const isAllowRegisterTopic = true;
+      // await this.semesterService.allowRegisterTopic();
       console.log('isAllowRegisterTopic', isAllowRegisterTopic);
 
       if (!isAllowRegisterTopic) {

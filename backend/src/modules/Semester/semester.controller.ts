@@ -12,8 +12,8 @@ import { CreateSemesterDto } from 'src/dtos';
 import { Semester } from 'src/entities';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
-import { SemesterService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
+import { SemesterService } from './semester.service';
 
 @Controller('semesters')
 @UseGuards(AuthGuard, RolesGuard)

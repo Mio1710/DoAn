@@ -3,11 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { ReportTopicDto } from 'src/dtos';
 import { ReportTopic } from 'src/entities';
+import { SemesterService } from 'src/modules/Semester/semester.service';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
 import { Repository, UpdateResult } from 'typeorm';
-import { SemesterService } from './semester.service';
 
 const randomName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 

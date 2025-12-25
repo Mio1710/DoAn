@@ -10,7 +10,7 @@ export * from './recommend-topic.controller';
 export * from './report-intern.controller';
 export * from './report-topic.controller';
 export * from './result.controller';
-export * from './semester.controller';
+// export * from './semester.controller';
 export * from './student-intern.controller';
 export * from './student-teacher.controller';
 export * from './super-admin.controller';
