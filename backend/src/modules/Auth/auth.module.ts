@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Student, StudentSubject } from 'src/entities';
+import { StudentSubject } from 'src/entities';
 import { ResponseUtils } from 'src/utils';
 import { StudentModule } from '../Student/student.module';
 import { UserModule } from '../User/user.module';
@@ -12,7 +12,7 @@ import { GoogleStrategy } from './guards/strategy/google.strategy';
   imports: [
     UserModule,
     StudentModule,
-    TypeOrmModule.forFeature([Student, StudentSubject]),
+    TypeOrmModule.forFeature([StudentSubject]),
   ],
   controllers: [AuthController],
   providers: [ResponseUtils, AuthService, GoogleStrategy],

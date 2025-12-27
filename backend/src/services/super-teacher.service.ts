@@ -1,7 +1,8 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Group, Student } from 'src/entities';
+import { Group } from 'src/entities';
 import { CommonService } from 'src/modules/common/common.service';
+import { Student } from 'src/modules/common/entities/student.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { FindOptionsWhere, IsNull, Repository } from 'typeorm';
 

@@ -1,18 +1,18 @@
+import { Student } from 'src/modules/common/entities/student.entity';
 import {
-  Entity,
-  ManyToOne,
-  OneToOne,
-  JoinColumn,
   Column,
-  Index,
   DeleteDateColumn,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
-import { Student } from './student.entity';
-import { Semester } from './semester.entity';
 import { BaseEntity } from './base.entity';
 import { Intern } from './intern.entity';
 import { ReportIntern } from './report-intern.entity';
+import { Semester } from './semester.entity';
 
 @Entity('student_intern')
 @Index(

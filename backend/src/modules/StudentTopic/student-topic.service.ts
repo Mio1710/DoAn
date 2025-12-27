@@ -6,10 +6,11 @@ import { validate } from 'class-validator';
 import { log } from 'console';
 import { Response } from 'express';
 import { CreateStudentDto, ImportStudentDto } from 'src/dtos';
-import { Group, Student } from 'src/entities';
+import { Group } from 'src/entities';
 import { Repository, UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
 import { CommonService } from '../common/common.service';
+import { Student } from '../common/entities/student.entity';
 import { Topic } from '../Topic/entities/topic.entity';
 import { StudentTopic } from './entities/student-topic.entity';
 

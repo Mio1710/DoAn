@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Student } from 'src/entities';
 import { Repository } from 'typeorm';
+import { Student } from '../common/entities/student.entity';
 import { CreateStudentDto } from './dto/student.dto';
 
 interface StudentOptions {

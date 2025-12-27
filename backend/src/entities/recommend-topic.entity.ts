@@ -1,7 +1,7 @@
+import { Student } from 'src/modules/common/entities/student.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { User } from './user.entity';
-import { Student } from './student.entity';
 
 @Entity('recommend_topic')
 export class RecommendTopic extends BaseEntity {

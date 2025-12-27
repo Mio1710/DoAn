@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { log } from 'console';
 import { ClsService } from 'nestjs-cls';
-import { Student } from 'src/entities';
 import { StudentSubject } from 'src/entities/studentSubject.entity';
 import { Not, Repository, UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
+import { Student } from '../common/entities/student.entity';
 
 @Injectable()
 export class StudentService {

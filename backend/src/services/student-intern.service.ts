@@ -8,8 +8,9 @@ import { parse } from 'date-fns';
 import { Response } from 'express';
 import { ClsService } from 'nestjs-cls';
 import { ImportStudentDto } from 'src/dtos';
-import { Student, StudentIntern } from 'src/entities';
+import { StudentIntern } from 'src/entities';
 import { CommonService } from 'src/modules/common/common.service';
+import { Student } from 'src/modules/common/entities/student.entity';
 import { Repository } from 'typeorm';
 import * as XLSX from 'xlsx';
 
