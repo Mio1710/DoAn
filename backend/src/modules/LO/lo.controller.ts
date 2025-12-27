@@ -14,9 +14,9 @@ import { Roles } from 'src/decorators/role.decorator';
 import { CreateLODto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
-import { LO } from 'src/modules/LO/entity/lo.entity';
-import { LOService } from 'src/modules/LO/lo.service';
 import { ResponseUtils } from 'src/utils';
+import { LO } from './entity/lo.entity';
+import { LOService } from './lo.service';
 
 @Controller('los')
 @UseGuards(AuthGuard, RolesGuard)

@@ -3,7 +3,6 @@ export * from './group.entity';
 export * from './intern-semester.entity';
 export * from './intern.entity';
 export * from './lo-student-topic.entity';
-export * from './lo.entity';
 export * from './recommend-topic.entity';
 export * from './report-intern.entity';
 export * from './report-topic.entity';

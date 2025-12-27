@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LO } from 'src/entities';
 import { LOStudentTopic } from 'src/entities/lo-student-topic.entity';
+import { LO } from 'src/modules/LO/entity/lo.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { Repository } from 'typeorm';
 

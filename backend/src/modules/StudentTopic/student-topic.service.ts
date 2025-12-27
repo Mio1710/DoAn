@@ -4,9 +4,8 @@ import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { log } from 'console';
-import { parse } from 'date-fns';
 import { Response } from 'express';
-import { ImportStudentDto } from 'src/dtos';
+import { CreateStudentDto, ImportStudentDto } from 'src/dtos';
 import { Group, Student } from 'src/entities';
 import { Repository, UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
@@ -31,7 +30,7 @@ export class StudentTopicService {
     private readonly commonService: CommonService,
   ) {}
 
-  async getLists(khoa_id, query): Promise<Student[]> {
+  async getLists(faculty_id, query): Promise<Student[]> {
     const semester = await this.commonService.getActiveSemester();
 
     const queryBuilder = this.studentRepository
@@ -52,7 +51,7 @@ export class StudentTopicService {
         'teacher.hodem',
         'teacher.ten',
       ])
-      .where('students.khoa_id = :khoa_id', { khoa_id })
+      .where('students.khoa_id = :khoa_id', { khoa_id: faculty_id })
       .andWhere('studentTopic.status = :status', { status: 'new' })
       .andWhere('studentTopic.semester_id = :semester_id', {
         semester_id: semester.id,
@@ -312,12 +311,12 @@ export class StudentTopicService {
       }
       const rawData: ImportStudentDto[] = XLSX.utils.sheet_to_json(workSheet);
       const errors: any[] = [];
-      const validUsers: ImportStudentDto[] = [];
+      const validUsers: CreateStudentDto[] = [];
 
       const currentSemester = await this.commonService.getActiveSemester();
       for (const rawUser of rawData) {
         try {
-          const userInstance = plainToInstance(ImportStudentDto, rawUser);
+          const userInstance = plainToInstance(CreateStudentDto, rawUser);
 
           // Validate using class-validator
           const validationErrors = await validate(userInstance);
@@ -355,12 +354,6 @@ export class StudentTopicService {
           userInstance.matkhau = await bcrypt.hash('12345678', 10);
 
           userInstance.khoa_id = khoa_id;
-          userInstance.ngay_sinh = parse(
-            userInstance.ngay_sinh as unknown as string,
-            'dd/MM/yyyy',
-            new Date(),
-          );
-          console.log('userInstance', userInstance);
 
           validUsers.push(userInstance);
         } catch (error) {
@@ -370,7 +363,7 @@ export class StudentTopicService {
 
       const savedUsers = await Promise.all(
         validUsers.map(async (user) => {
-          const st = await this.studentRepository.save(user);
+          const st = await this.studentRepository.create(user);
           await this.activeSemester([st.id], currentSemester.id);
           return st;
         }),

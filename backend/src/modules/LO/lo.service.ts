@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { LO } from 'src/entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
+import { LO } from './entity/lo.entity';
 
 @Injectable()
 export class LOService {
@@ -34,8 +34,11 @@ export class LOService {
 
   async delete(id: number): Promise<DeleteResult> {
     try {
-      const LO = await this.LORepository.findOne({ where: { id } });
-      return await this.LORepository.softDelete(LO.id);
+      const lo = await this.LORepository.findOne({ where: { id } });
+      if (!lo) {
+        throw new HttpException('LO not found', 404);
+      }
+      return await this.LORepository.softDelete(lo.id);
     } catch (error) {
       throw new HttpException(error, 400);
     }

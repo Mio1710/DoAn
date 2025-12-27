@@ -19,6 +19,8 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthModule } from './modules/Auth/auth.module';
 import { CommonModule } from './modules/common/common.module';
 import { FacultyModule } from './modules/Faculty/faculty.module';
+import { LO } from './modules/LO/entity/lo.entity';
+import { LOModule } from './modules/LO/lo.module';
 import { SemesterModule } from './modules/Semester/semester.module';
 import { StudentModule } from './modules/Student/student.module';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
@@ -46,6 +48,7 @@ config();
       ...Object.values(ListEntities),
       Topic,
       StudentTopic,
+      LO,
     ]),
     TypeOrmModule.forRootAsync(databaseConfig.asProvider()),
     JwtModule.register({
@@ -73,6 +76,7 @@ config();
     SemesterModule,
     FacultyModule,
     StudentModule,
+    LOModule,
   ],
   controllers: [
     AppController,

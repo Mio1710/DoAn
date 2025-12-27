@@ -1,5 +1,4 @@
 export * from './intern.service';
-export * from './lo.service';
 export * from './recommend-topic.service';
 export * from './report-intern.service';
 export * from './report-topic.service';

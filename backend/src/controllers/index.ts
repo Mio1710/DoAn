@@ -2,7 +2,6 @@ export * from './teacher.controller';
 // export * from './auth.controller';
 export * from './admin.controller';
 export * from './intern.controller';
-export * from './lo.controller';
 export * from './public.controller';
 export * from './recommend-topic.controller';
 export * from './report-intern.controller';

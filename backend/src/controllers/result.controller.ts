@@ -10,10 +10,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { LOResultItemDto } from 'src/dtos/result.dto';
-import { LO } from 'src/entities';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
-import { LOService, ResultService } from 'src/services';
+import { LO } from 'src/modules/LO/entity/lo.entity';
+import { LOService } from 'src/modules/LO/lo.service';
+import { ResultService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 
 @Controller('results')
