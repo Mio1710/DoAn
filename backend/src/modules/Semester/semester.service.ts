@@ -3,6 +3,7 @@ import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Semester } from 'src/entities';
 import { Repository } from 'typeorm';
+import { CommonService } from '../common/common.service';
 
 @Injectable()
 export class SemesterService {
@@ -12,6 +13,8 @@ export class SemesterService {
 
     @Inject(CACHE_MANAGER)
     private readonly cacheManager: Cache,
+
+    private readonly commonService: CommonService,
   ) {}
 
   async getLists(options): Promise<Semester[]> {
@@ -79,38 +82,8 @@ export class SemesterService {
     }
   }
 
-  async getActiveSemester(): Promise<Semester> {
-    const activeSemesterCache = await this.cacheManager.get('activeSemester');
-    if (!activeSemesterCache) {
-      const semester = await this.semesterRepository.findOne({
-        where: { status: true },
-        select: [
-          'id',
-          'ten',
-          'status',
-          'start_date',
-          'end_date',
-          'start_register_topic',
-          'end_register_topic',
-          'start_publish_topic',
-          'end_publish_topic',
-          'start_register_group',
-          'end_register_group',
-          'start_defense',
-          'end_defense',
-          'start_report_topic',
-          'end_report_topic',
-          'public_result',
-        ],
-      });
-      await this.cacheManager.set('activeSemester', semester);
-      return semester;
-    }
-    return activeSemesterCache as Semester;
-  }
-
   async allowRegisterGroup(): Promise<boolean> {
-    const semester = await this.getActiveSemester();
+    const semester = await this.commonService.getActiveSemester();
     if (!semester) {
       throw new HttpException('Semester not found', 404);
     }
@@ -124,7 +97,7 @@ export class SemesterService {
   }
 
   async allowRegisterTopic(): Promise<boolean> {
-    const semester = await this.getActiveSemester();
+    const semester = await this.commonService.getActiveSemester();
     if (!semester) {
       throw new HttpException('Semester not found', 404);
     }
@@ -138,7 +111,7 @@ export class SemesterService {
   }
 
   async allowPublishTopic(): Promise<boolean> {
-    const semester = await this.getActiveSemester();
+    const semester = await this.commonService.getActiveSemester();
     if (!semester) {
       throw new HttpException('Semester not found', 404);
     }

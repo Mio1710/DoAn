@@ -13,6 +13,7 @@ import { Semester } from 'src/entities';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { ResponseUtils } from 'src/utils';
+import { CommonService } from '../common/common.service';
 import { SemesterService } from './semester.service';
 
 @Controller('semesters')
@@ -21,6 +22,7 @@ export class SemesterController {
   constructor(
     private readonly semesterService: SemesterService,
     private readonly responseUtils: ResponseUtils,
+    private readonly commonService: CommonService,
   ) {}
 
   @Get()
@@ -39,7 +41,7 @@ export class SemesterController {
 
   @Get('active')
   async getActiveSemester(@Res() res) {
-    const data = (await this.semesterService.getActiveSemester()) ?? {};
+    const data = (await this.commonService.getActiveSemester()) ?? {};
     return this.responseUtils.success({ data }, res);
   }
 
@@ -61,7 +63,7 @@ export class SemesterController {
     console.log('semester id', id);
 
     const data = await this.semesterService.update(id, semester as Semester);
-    await this.semesterService.getActiveSemester();
+    await this.commonService.getActiveSemester();
     console.log('semester data', data);
     return this.responseUtils.success({ data }, res);
   }

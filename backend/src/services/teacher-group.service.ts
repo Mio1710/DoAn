@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TeacherGroupCreateDto } from 'src/dtos/teacher-group.dto';
 import { TeacherGroup, TeacherGroupMember, User } from 'src/entities';
-import { SemesterService } from 'src/modules/Semester/semester.service';
+import { CommonService } from 'src/modules/common/common.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class TeacherGroupSerivce {
 
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
   ) {}
 
   async create(
@@ -26,7 +26,7 @@ export class TeacherGroupSerivce {
     const getListTeacherValid = await this.userRepository.findByIds(
       teacherGroup.teacher_ids,
     );
-    const activeSemester = await this.semesterService.getActiveSemester();
+    const activeSemester = await this.commonService.getActiveSemester();
 
     const newGroup = new TeacherGroup();
     newGroup.semester = activeSemester;
@@ -49,7 +49,7 @@ export class TeacherGroupSerivce {
   }
 
   async getListGroups(options, faculty: number): Promise<TeacherGroup[]> {
-    const activeSemester = await this.semesterService.getActiveSemester();
+    const activeSemester = await this.commonService.getActiveSemester();
     let semester_id = activeSemester.id;
     if (options.semester_id) {
       semester_id = options.semester_id;

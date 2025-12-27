@@ -1,4 +1,4 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
@@ -10,7 +10,7 @@ import { ImportStudentDto } from 'src/dtos';
 import { Group, Student } from 'src/entities';
 import { Repository, UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
-import { SemesterService } from '../Semester/semester.service';
+import { CommonService } from '../common/common.service';
 import { Topic } from '../Topic/entities/topic.entity';
 import { StudentTopic } from './entities/student-topic.entity';
 
@@ -28,13 +28,11 @@ export class StudentTopicService {
 
     @InjectRepository(Topic)
     private readonly topicRepository: Repository<Topic>,
-
-    @Inject(SemesterService)
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
   ) {}
 
   async getLists(khoa_id, query): Promise<Student[]> {
-    const semester = await this.semesterService.getActiveSemester();
+    const semester = await this.commonService.getActiveSemester();
 
     const queryBuilder = this.studentRepository
       .createQueryBuilder('students')
@@ -80,7 +78,7 @@ export class StudentTopicService {
   async create(student) {
     log('student before create', student);
     let user = await this.checkExistStudent(student.maso);
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
     if (user) {
       // check if student already in semester
       const studentTopic = await this.checkExistStudentTopic(
@@ -127,7 +125,7 @@ export class StudentTopicService {
     topicId: number,
   ): Promise<UpdateResult> {
     try {
-      const currentSemester = await this.semesterService.getActiveSemester();
+      const currentSemester = await this.commonService.getActiveSemester();
       // check if student already in semester topic
       const studentTopic = await this.studentTopicRepository.findOne({
         where: { student_id: studentId, semester_id: currentSemester.id },
@@ -159,7 +157,7 @@ export class StudentTopicService {
 
   async cancelTopic(studentId: number): Promise<UpdateResult> {
     try {
-      const currentSemester = await this.semesterService.getActiveSemester();
+      const currentSemester = await this.commonService.getActiveSemester();
       const studentTopic = await this.studentTopicRepository.findOne({
         where: { student_id: studentId, semester_id: currentSemester.id },
       });
@@ -232,7 +230,7 @@ export class StudentTopicService {
   }
 
   async isEnoughStudent(topic_id: number) {
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
     const topic = await this.topicRepository.findOne({
       where: { id: topic_id },
     });
@@ -316,7 +314,7 @@ export class StudentTopicService {
       const errors: any[] = [];
       const validUsers: ImportStudentDto[] = [];
 
-      const currentSemester = await this.semesterService.getActiveSemester();
+      const currentSemester = await this.commonService.getActiveSemester();
       for (const rawUser of rawData) {
         try {
           const userInstance = plainToInstance(ImportStudentDto, rawUser);
@@ -402,7 +400,7 @@ export class StudentTopicService {
   }
   async getRegistedDetail(userId: number) {
     try {
-      const activeSemester = await this.semesterService.getActiveSemester();
+      const activeSemester = await this.commonService.getActiveSemester();
       const result = {
         topic: null,
         students: [],

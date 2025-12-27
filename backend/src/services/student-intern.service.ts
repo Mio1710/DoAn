@@ -9,7 +9,7 @@ import { Response } from 'express';
 import { ClsService } from 'nestjs-cls';
 import { ImportStudentDto } from 'src/dtos';
 import { Student, StudentIntern } from 'src/entities';
-import { SemesterService } from 'src/modules/Semester/semester.service';
+import { CommonService } from 'src/modules/common/common.service';
 import { Repository } from 'typeorm';
 import * as XLSX from 'xlsx';
 
@@ -24,11 +24,11 @@ export class StudentInternService {
 
     private readonly cls: ClsService,
 
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
   ) {}
 
   async getLists(khoa_id, params): Promise<Student[]> {
-    const semester = await this.semesterService.getActiveSemester();
+    const semester = await this.commonService.getActiveSemester();
 
     const options = {
       select: {
@@ -75,7 +75,7 @@ export class StudentInternService {
   async create(student) {
     log('student before create', student);
     let user = await this.checkExistStudent(student.maso);
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
     if (user) {
       // check if student already in semester
       const studentIntern = await this.checkExistStudentIntern(
@@ -196,7 +196,7 @@ export class StudentInternService {
       const errors: any[] = [];
       const validUsers: ImportStudentDto[] = [];
 
-      const currentSemester = await this.semesterService.getActiveSemester();
+      const currentSemester = await this.commonService.getActiveSemester();
       for (const rawUser of rawData) {
         try {
           const userInstance = plainToInstance(ImportStudentDto, rawUser);

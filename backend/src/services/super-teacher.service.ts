@@ -1,14 +1,14 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group, Student } from 'src/entities';
-import { SemesterService } from 'src/modules/Semester/semester.service';
+import { CommonService } from 'src/modules/common/common.service';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { FindOptionsWhere, IsNull, Repository } from 'typeorm';
 
 @Injectable()
 export class SuperTeacherService {
   constructor(
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
     @InjectRepository(Student)
     private readonly studentRepository: Repository<Student>,
 
@@ -21,9 +21,9 @@ export class SuperTeacherService {
 
   async getStudentTopic(khoa_id: number): Promise<Student[]> {
     try {
-      console.log('khoa_id', khoa_id, this.semesterService);
+      console.log('khoa_id', khoa_id);
 
-      const activeSemester = await this.semesterService.getActiveSemester();
+      const activeSemester = await this.commonService.getActiveSemester();
       console.log('activeSemester', activeSemester, khoa_id);
 
       const result = await this.studentRepository
@@ -62,7 +62,7 @@ export class SuperTeacherService {
   async lockGroup(khoa_id: number) {
     try {
       //get list student haven't join group
-      const activeSemester = await this.semesterService.getActiveSemester();
+      const activeSemester = await this.commonService.getActiveSemester();
       const listStudent = await this.studentRepository.find({
         where: {
           khoa_id,
@@ -103,7 +103,7 @@ export class SuperTeacherService {
   async getStudentGroup(khoa_id: number, query) {
     try {
       const isNullGroupTeacher = query.filter?.is_null_group_teacher;
-      const activeSemester = await this.semesterService.getActiveSemester();
+      const activeSemester = await this.commonService.getActiveSemester();
       let options: FindOptionsWhere<Group> = {
         studentTopics: {
           semester_id: activeSemester.id,

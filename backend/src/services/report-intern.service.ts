@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { ReportInternDto } from 'src/dtos';
 import { ReportIntern, StudentIntern } from 'src/entities';
-import { SemesterService } from 'src/modules/Semester/semester.service';
+import { CommonService } from 'src/modules/common/common.service';
 import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
 import { Repository, UpdateResult } from 'typeorm';
 import { StudentInternService } from './student-intern.service';
@@ -15,7 +15,7 @@ export class ReportInternService {
     @InjectRepository(ReportIntern)
     private readonly reportInternRepository: Repository<ReportIntern>,
     private readonly studentInternService: StudentInternService,
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
     // private readonly s3ClientUtils: S3ClientUtil,
   ) {}
 
@@ -116,7 +116,7 @@ export class ReportInternService {
   }
 
   async getStudentIntern(student_id: number): Promise<StudentIntern> {
-    const activeSemester = await this.semesterService.getActiveSemester();
+    const activeSemester = await this.commonService.getActiveSemester();
     return await this.studentInternService.findOne({
       student_id,
       semester_id: activeSemester.id,

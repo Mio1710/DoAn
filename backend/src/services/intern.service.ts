@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClsService } from 'nestjs-cls';
 import { ListInternQuery } from 'src/interfaces/queries/listIntern.interface';
-import { SemesterService } from 'src/modules/Semester/semester.service';
+import { CommonService } from 'src/modules/common/common.service';
 import { Repository } from 'typeorm';
 import { Intern, InternSemester, Semester } from '../entities';
 import { User } from '../entities/user.entity';
@@ -24,7 +24,7 @@ export class InternService {
 
     // private readonly userService: UserService,
 
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
     private readonly cls: ClsService,
   ) {}
 
@@ -34,7 +34,7 @@ export class InternService {
     const viewAll = options?.viewAll ?? false;
     const userID = this.cls.get('userId');
     if (!semester_id) {
-      const semester = await this.semesterService.getActiveSemester();
+      const semester = await this.commonService.getActiveSemester();
       semester_id = semester.id;
     }
     console.log('semester_id', semester_id, khoa_id, options, viewAll);
@@ -92,7 +92,7 @@ export class InternService {
     console.log('intern data create', data);
 
     // active semester
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
 
     const internSemester = await this.internSemesterRepository.save({
       intern_id: data.id,
@@ -230,7 +230,7 @@ export class InternService {
       .execute();
 
     // add intern semester
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
     const newInterns = await this.internRepository.find({ where: { khoa_id } });
     return await this.internSemesterRepository
       .createQueryBuilder()

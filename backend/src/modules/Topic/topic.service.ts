@@ -4,7 +4,7 @@ import { ClsService } from 'nestjs-cls';
 import { Semester } from 'src/entities';
 import { ListTopicQuery } from 'src/interfaces/queries/listTopic.interface';
 import { Repository, UpdateResult } from 'typeorm';
-import { SemesterService } from '../Semester/semester.service';
+import { CommonService } from '../common/common.service';
 import { TopicSemester } from './entities/topic-semester.entity';
 import { Topic } from './entities/topic.entity';
 
@@ -20,7 +20,7 @@ export class TopicService {
     @InjectRepository(TopicSemester)
     private readonly topicSemesterRepository: Repository<TopicSemester>,
 
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
     private readonly cls: ClsService,
   ) {}
 
@@ -30,7 +30,7 @@ export class TopicService {
     const viewAll = options?.viewAll ?? false;
     const userID = this.cls.get('userId');
     if (!semester_id) {
-      const semester = await this.semesterService.getActiveSemester();
+      const semester = await this.commonService.getActiveSemester();
       semester_id = semester.id;
     }
     console.log('semester_id', semester_id, khoa_id, options, viewAll);
@@ -101,7 +101,7 @@ export class TopicService {
     console.log('topic data create', data);
 
     // active semester
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
 
     const topicSemester = await this.topicSemesterRepository.save({
       topic_id: data.id,
@@ -226,7 +226,7 @@ export class TopicService {
       .execute();
 
     // add topic semester
-    const currentSemester = await this.semesterService.getActiveSemester();
+    const currentSemester = await this.commonService.getActiveSemester();
     const newTopics = await this.topicRepository.find({ where: { khoa_id } });
     return await this.topicSemesterRepository
       .createQueryBuilder()

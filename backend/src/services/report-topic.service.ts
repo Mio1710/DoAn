@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { ReportTopicDto } from 'src/dtos';
 import { ReportTopic } from 'src/entities';
-import { SemesterService } from 'src/modules/Semester/semester.service';
+import { CommonService } from 'src/modules/common/common.service';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
@@ -16,7 +16,7 @@ export class ReportTopicService {
     @InjectRepository(ReportTopic)
     private readonly reportTopicRepository: Repository<ReportTopic>,
     private readonly studentTopicService: StudentTopicService,
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
   ) {}
 
   async create(reportTopic: ReportTopicDto): Promise<ReportTopic> {
@@ -106,7 +106,7 @@ export class ReportTopicService {
   }
 
   async getStudentTopic(student_id: number): Promise<StudentTopic> {
-    const activeSemester = await this.semesterService.getActiveSemester();
+    const activeSemester = await this.commonService.getActiveSemester();
     console.log('check student topic', student_id);
 
     return await this.studentTopicService.findOne({
@@ -131,7 +131,7 @@ export class ReportTopicService {
   // check if student have not create group
   async checkStudentGroup(studentId: number): Promise<boolean> {
     try {
-      const currentSemester = await this.semesterService.getActiveSemester();
+      const currentSemester = await this.commonService.getActiveSemester();
       const studentTopic = await this.studentTopicService.findOne({
         student_id: studentId,
         semester_id: currentSemester.id,

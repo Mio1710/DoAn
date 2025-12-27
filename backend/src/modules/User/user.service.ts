@@ -10,13 +10,13 @@ import { UserRepository } from 'src/repositories';
 import { StudentService } from 'src/services';
 import { UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
-import { SemesterService } from '../Semester/semester.service';
+import { CommonService } from '../common/common.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly semesterService: SemesterService,
+    private readonly commonService: CommonService,
     private readonly studentService: StudentService,
   ) {}
 
@@ -271,7 +271,7 @@ export class UserService {
 
   async getStudentTopic(teacher_id: number): Promise<Student[]> {
     try {
-      const activeSemester = await this.semesterService.getActiveSemester();
+      const activeSemester = await this.commonService.getActiveSemester();
       const options = {
         select: {
           id: true,
@@ -312,7 +312,7 @@ export class UserService {
   // Get student intern
   async getStudentIntern(teacher_id: number): Promise<Student[]> {
     try {
-      const activeSemester = await this.semesterService.getActiveSemester();
+      const activeSemester = await this.commonService.getActiveSemester();
       const options = {
         select: {
           id: true,
