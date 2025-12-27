@@ -1,7 +1,7 @@
+import { LO } from 'src/modules/LO/entity/lo.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { Column, Entity, JoinColumn, ManyToOne, Unique } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { LO } from './lo.entity';
 
 @Entity('lo_student_topics')
 @Unique('student_topic_lo', ['student_topic', 'lo'])

@@ -122,7 +122,6 @@ export class StudentInternService {
   async update(studentId: number, data): Promise<StudentIntern> {
     try {
       const studentIntern = await this.findOne({ student_id: studentId });
-      console.log('studentIntern11111', data, studentIntern);
 
       return await this.studentInternRepository.save(studentIntern);
     } catch (error) {

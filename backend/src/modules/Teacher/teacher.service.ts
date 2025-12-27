@@ -7,7 +7,7 @@ import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.en
 import { FindOptionsWhere, IsNull, Repository } from 'typeorm';
 
 @Injectable()
-export class SuperTeacherService {
+export class TeacherService {
   constructor(
     private readonly commonService: CommonService,
     @InjectRepository(Student)

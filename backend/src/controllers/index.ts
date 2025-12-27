@@ -1,5 +1,3 @@
-export * from './teacher.controller';
-// export * from './auth.controller';
 export * from './admin.controller';
 export * from './intern.controller';
 export * from './public.controller';
@@ -11,5 +9,4 @@ export * from './result.controller';
 export * from './student-intern.controller';
 export * from './student-teacher.controller';
 export * from './super-admin.controller';
-export * from './super-teacher.controller';
 export * from './teacher-group.controller';
