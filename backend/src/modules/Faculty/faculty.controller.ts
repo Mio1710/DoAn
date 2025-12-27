@@ -14,8 +14,8 @@ import { Roles } from 'src/decorators/role.decorator';
 import { FacultyDto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
-import { FacultyService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
+import { FacultyService } from './faculty.service';
 
 @UseGuards(AuthGuard, RolesGuard)
 @Controller('faculties')

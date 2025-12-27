@@ -1,9 +1,9 @@
+import { Faculty } from 'src/modules/common/entities/faculty.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { Semester } from './semester.entity';
-import { Faculty } from './faculty.entity';
-import { TeacherGroupMember } from './teacher_group_member.entity';
 import { Group } from './group.entity';
+import { Semester } from './semester.entity';
+import { TeacherGroupMember } from './teacher_group_member.entity';
 
 @Entity('teacher_groups')
 export class TeacherGroup extends BaseEntity {

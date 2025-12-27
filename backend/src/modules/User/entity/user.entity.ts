@@ -1,3 +1,5 @@
+import { TeacherGroupMember } from 'src/entities';
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
 import {
   Column,
@@ -7,8 +9,6 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { TeacherGroupMember } from './teacher_group_member.entity';
 
 @Entity()
 export class User extends BaseEntity {

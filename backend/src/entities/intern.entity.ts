@@ -1,18 +1,18 @@
+import { Faculty } from 'src/modules/common/entities/faculty.entity';
 import {
-  Entity,
   Column,
-  ManyToOne,
-  OneToOne,
-  JoinColumn,
   DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { User } from './user.entity';
-import { StudentIntern } from './student-intern.entity';
-import { Faculty } from './faculty.entity';
-import { Student } from './student.entity';
 import { InternSemester } from './intern-semester.entity';
+import { StudentIntern } from './student-intern.entity';
+import { Student } from './student.entity';
+import { User } from './user.entity';
 
 @Entity('intern')
 // @Index('IDX_student_semester', ['student_intern_id', 'semester_id'], { unique: true })
@@ -56,10 +56,10 @@ export class Intern extends BaseEntity {
   teacher_id: number;
 
   @ManyToOne(() => Student)
-  @JoinColumn({ name: 'student_intern_id'})
+  @JoinColumn({ name: 'student_intern_id' })
   student: Student;
 
-  @Column({ name: 'student_intern_id'})
+  @Column({ name: 'student_intern_id' })
   student_intern_id: number;
 
   @Column({ name: 'khoa_id' })

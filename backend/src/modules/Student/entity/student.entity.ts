@@ -1,9 +1,8 @@
+import { Group, StudentIntern } from 'src/entities';
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { Group } from './group.entity';
-import { StudentIntern } from './student-intern.entity';
 // import { Intern } from './intern.entity';
 
 @Entity('student')
@@ -37,7 +36,7 @@ export class Student extends BaseEntity {
 
   @ManyToOne(() => Faculty)
   @JoinColumn({ name: 'khoa_id' })
-  facutily: Faculty;
+  faculty: Faculty;
 
   @OneToMany(() => StudentTopic, (studentTopic) => studentTopic.student, {
     onUpdate: 'NO ACTION',

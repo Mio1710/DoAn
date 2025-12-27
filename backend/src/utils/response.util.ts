@@ -1,8 +1,10 @@
-import { Res } from '@nestjs/common';
+import { Injectable, Res } from '@nestjs/common';
 import { HttpStatusCode } from 'axios';
 import { Response } from 'express';
 import { getStatusCodeMessage } from 'src/constants/http.constants';
 import { ResponseInterface } from 'src/interfaces';
+
+@Injectable()
 export class ResponseUtils {
   failed(response: ResponseInterface, @Res() res: Response) {
     const status_code = response.status_code ?? HttpStatusCode.BadRequest;

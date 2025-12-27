@@ -1,6 +1,13 @@
-import { Entity, Column, ManyToOne, JoinColumn, OneToOne, DeleteDateColumn } from 'typeorm';
+import { Faculty } from 'src/modules/common/entities/faculty.entity';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+} from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { Faculty } from './faculty.entity';
 import { LOStudentTopic } from './lo-student-topic.entity';
 
 @Entity('los')

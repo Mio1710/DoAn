@@ -12,8 +12,8 @@ import { Roles } from 'src/decorators/role.decorator';
 import { CreateUserDTO } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
+import { FacultyService } from 'src/modules/Faculty/faculty.service';
 import { UserService } from 'src/modules/User/user.service';
-import { FacultyService } from 'src/services';
 import { ResponseUtils } from 'src/utils/response.util';
 
 @Controller('super-admin')
@@ -22,7 +22,8 @@ import { ResponseUtils } from 'src/utils/response.util';
 export class SuperAdminController {
   constructor(
     private readonly userService: UserService,
-    private facultyService: FacultyService,
+
+    private readonly facultyService: FacultyService,
     private readonly responseUtils: ResponseUtils,
   ) {
     console.log('responseUtils', responseUtils);

@@ -1,6 +1,6 @@
-import { Entity, Column, DeleteDateColumn, OneToMany } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { User } from './user.entity';
+import { User } from 'src/entities';
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
+import { Column, DeleteDateColumn, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class Faculty extends BaseEntity {

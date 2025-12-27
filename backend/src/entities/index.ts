@@ -1,5 +1,4 @@
 export * from './base.entity';
-export * from './faculty.entity';
 export * from './group.entity';
 export * from './intern-semester.entity';
 export * from './intern.entity';

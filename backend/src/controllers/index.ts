@@ -1,4 +1,3 @@
-export * from './faculty.controller';
 export * from './student.controller';
 export * from './teacher.controller';
 // export * from './auth.controller';
