@@ -1,7 +1,7 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { User } from './user.entity';
 import { format } from 'date-fns';
+import { User } from 'src/modules/common/entities/user.entity';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity('semester')
 export class Semester extends BaseEntity {

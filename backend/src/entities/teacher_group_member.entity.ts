@@ -1,6 +1,6 @@
+import { User } from 'src/modules/common/entities/user.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { User } from './user.entity';
 import { TeacherGroup } from './teacher_group.entity';
 
 @Entity('teacher_group_members')

@@ -11,4 +11,3 @@ export * from './student-intern.entity';
 export * from './studentSubject.entity';
 export * from './teacher_group.entity';
 export * from './teacher_group_member.entity';
-export * from './user.entity';

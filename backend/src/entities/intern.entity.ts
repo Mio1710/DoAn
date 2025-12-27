@@ -1,5 +1,6 @@
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
 import { Student } from 'src/modules/common/entities/student.entity';
+import { User } from 'src/modules/common/entities/user.entity';
 import {
   Column,
   DeleteDateColumn,
@@ -12,7 +13,6 @@ import {
 import { BaseEntity } from './base.entity';
 import { InternSemester } from './intern-semester.entity';
 import { StudentIntern } from './student-intern.entity';
-import { User } from './user.entity';
 
 @Entity('intern')
 // @Index('IDX_student_semester', ['student_intern_id', 'semester_id'], { unique: true })

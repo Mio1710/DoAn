@@ -3,10 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ClsService } from 'nestjs-cls';
 import { ListInternQuery } from 'src/interfaces/queries/listIntern.interface';
 import { CommonService } from 'src/modules/common/common.service';
+import { User } from 'src/modules/common/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Intern, InternSemester, Semester } from '../entities';
-import { User } from '../entities/user.entity';
-// import { UserService } from './user.service';
 @Injectable()
 export class InternService {
   constructor(

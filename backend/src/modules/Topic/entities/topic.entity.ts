@@ -1,6 +1,6 @@
-import { User } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
+import { User } from 'src/modules/common/entities/user.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import {
   Column,
