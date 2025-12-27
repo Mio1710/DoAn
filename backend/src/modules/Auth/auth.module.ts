@@ -1,17 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Student, StudentSubject } from 'src/entities';
-import { StudentService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
+import { StudentModule } from '../Student/student.module';
 import { UserModule } from '../User/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleStrategy } from './guards/strategy/google.strategy';
 
 @Module({
-  imports: [UserModule, TypeOrmModule.forFeature([Student, StudentSubject])],
+  imports: [
+    UserModule,
+    StudentModule,
+    TypeOrmModule.forFeature([Student, StudentSubject]),
+  ],
   controllers: [AuthController],
-  providers: [StudentService, ResponseUtils, AuthService, GoogleStrategy],
+  providers: [ResponseUtils, AuthService, GoogleStrategy],
   exports: [],
 })
 export class AuthModule {}

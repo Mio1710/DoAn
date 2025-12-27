@@ -20,6 +20,7 @@ import { AuthModule } from './modules/Auth/auth.module';
 import { CommonModule } from './modules/common/common.module';
 import { FacultyModule } from './modules/Faculty/faculty.module';
 import { SemesterModule } from './modules/Semester/semester.module';
+import { StudentModule } from './modules/Student/student.module';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicModule } from './modules/StudentTopic/student-topic.module';
 import { TeacherInternModule } from './modules/TeacherIntern/teacher-inter.module';
@@ -71,6 +72,7 @@ config();
     StudentTopicModule,
     SemesterModule,
     FacultyModule,
+    StudentModule,
   ],
   controllers: [
     AppController,
