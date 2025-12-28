@@ -2,12 +2,12 @@ import { HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { ReportTopicDto } from 'src/dtos';
-import { ReportTopic } from 'src/entities';
 import { CommonService } from 'src/modules/common/common.service';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
 import { Repository, UpdateResult } from 'typeorm';
+import { ReportTopic } from './entity/report.entity';
 
 const randomName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 

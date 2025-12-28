@@ -18,11 +18,11 @@ import { UserService } from 'src/modules/User/user.service';
 import {
   RecommendTopicService,
   ReportInternService,
-  ReportTopicService,
   ResultService,
 } from 'src/services';
 
 import { ResponseUtils } from 'src/utils/response.util';
+import { ReportTopicService } from '../Report/report.service';
 
 @Controller('teachers')
 @UseGuards(AuthGuard, RolesGuard)

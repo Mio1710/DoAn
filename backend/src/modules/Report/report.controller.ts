@@ -18,13 +18,13 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ReportTopicDto, UpdateReportTopicDto } from 'src/dtos';
 import { AllowReportTopicGuard } from 'src/modules/Auth/guards/allow-report-topic.guard';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
-import { ReportTopicService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 import * as stream from 'stream';
+import { ReportTopicService } from './report.service';
 
 @Controller('report-topic')
 @UseGuards(AuthGuard)
-export class ReportTopicController {
+export class ReportController {
   constructor(
     private readonly reportTopicService: ReportTopicService,
     private readonly responseUtils: ResponseUtils,

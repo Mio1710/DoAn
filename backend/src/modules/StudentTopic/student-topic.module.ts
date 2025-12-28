@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ReportTopic, Semester } from 'src/entities';
+import { Semester } from 'src/entities';
 import { Topic } from 'src/modules/Topic/entities/topic.entity';
 // import { SemesterService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
@@ -14,13 +14,7 @@ import { StudentTopicService } from './student-topic.service';
 @Module({
   imports: [
     CommonModule,
-    TypeOrmModule.forFeature([
-      ReportTopic,
-      StudentTopic,
-      Group,
-      Topic,
-      Semester,
-    ]),
+    TypeOrmModule.forFeature([StudentTopic, Group, Topic, Semester]),
   ],
   controllers: [StudentTopicController],
   providers: [StudentTopicService, ResponseUtils, SemesterService],

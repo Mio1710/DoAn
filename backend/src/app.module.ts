@@ -21,6 +21,7 @@ import { CommonModule } from './modules/common/common.module';
 import { FacultyModule } from './modules/Faculty/faculty.module';
 import { LO } from './modules/LO/entity/lo.entity';
 import { LOModule } from './modules/LO/lo.module';
+import { ReportModule } from './modules/Report/report.module';
 import { SemesterModule } from './modules/Semester/semester.module';
 import { StudentModule } from './modules/Student/student.module';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
@@ -77,6 +78,7 @@ config();
     FacultyModule,
     StudentModule,
     LOModule,
+    ReportModule,
   ],
   controllers: [
     AppController,
