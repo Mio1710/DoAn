@@ -15,14 +15,11 @@ import { RecommendTopicStatusDto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { UserService } from 'src/modules/User/user.service';
-import {
-  RecommendTopicService,
-  ReportInternService,
-  ResultService,
-} from 'src/services';
+import { RecommendTopicService, ReportInternService } from 'src/services';
 
 import { ResponseUtils } from 'src/utils/response.util';
 import { ReportTopicService } from '../Report/report.service';
+import { ResultService } from '../Result/result.service';
 
 @Controller('teachers')
 @UseGuards(AuthGuard, RolesGuard)

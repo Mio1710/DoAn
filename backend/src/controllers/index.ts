@@ -3,7 +3,6 @@ export * from './intern.controller';
 export * from './public.controller';
 export * from './recommend-topic.controller';
 export * from './report-intern.controller';
-export * from './result.controller';
 export * from './student-intern.controller';
 export * from './student-teacher.controller';
 export * from './super-admin.controller';

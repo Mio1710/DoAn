@@ -8,6 +8,6 @@ import { LOService } from './lo.service';
   imports: [TypeOrmModule.forFeature([LO])],
   controllers: [LOController],
   providers: [LOService],
-  exports: [LOService],
+  exports: [LOService, TypeOrmModule],
 })
 export class LOModule {}

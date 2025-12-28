@@ -22,6 +22,7 @@ import { FacultyModule } from './modules/Faculty/faculty.module';
 import { LO } from './modules/LO/entity/lo.entity';
 import { LOModule } from './modules/LO/lo.module';
 import { ReportModule } from './modules/Report/report.module';
+import { ResultModule } from './modules/Result/result.module';
 import { SemesterModule } from './modules/Semester/semester.module';
 import { StudentModule } from './modules/Student/student.module';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
@@ -31,7 +32,6 @@ import { Topic } from './modules/Topic/entities/topic.entity';
 import { TopicController } from './modules/Topic/topic.controller';
 import { TopicModule } from './modules/Topic/topic.module';
 import { UserModule } from './modules/User/user.module';
-import * as ListRepositories from './repositories';
 import * as ListServices from './services';
 import { BaseSubscriber } from './subscribers/base.subscribe';
 import * as ListUtils from './utils';
@@ -79,6 +79,7 @@ config();
     StudentModule,
     LOModule,
     ReportModule,
+    ResultModule,
   ],
   controllers: [
     AppController,
@@ -87,7 +88,6 @@ config();
   ],
   providers: [
     AppService,
-    ...Object.values(ListRepositories),
     ...Object.values(ListServices),
     ...Object.values(ListCommands),
     ...Object.values(ListUtils),
