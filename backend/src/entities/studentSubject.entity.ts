@@ -1,3 +1,6 @@
+import { Faculty } from 'src/modules/common/entities/faculty.entity';
+import { Semester } from 'src/modules/common/entities/semester.entity';
+import { Student } from 'src/modules/common/entities/student.entity';
 import {
   Column,
   Entity,
@@ -5,9 +8,6 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Faculty } from './faculty.entity';
-import { Semester } from './semester.entity';
-import { Student } from './student.entity';
 
 @Entity('student_subject')
 export class StudentSubject {

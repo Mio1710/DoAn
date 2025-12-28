@@ -18,8 +18,8 @@ import {
   SingInDto,
   UpdateProfileDto,
 } from 'src/dtos';
-import { User } from 'src/entities';
 import { ResponseUtils } from 'src/utils';
+import { User } from '../common/entities/user.entity';
 import { UserService } from '../User/user.service';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './guards/auth.guard';

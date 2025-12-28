@@ -21,13 +21,11 @@ export class CreateStudentDto {
   @Length(6, 20)
   matkhau: string = '12345678';
 
-  // matkhau: string;
-
   @IsNotEmpty()
   lop: string;
 
-  @IsOptional()
-  khoa_id?: number;
+  @IsNotEmpty()
+  khoa_id: number;
 }
 
 export class UpdateStudentDto {

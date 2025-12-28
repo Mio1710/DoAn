@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Post,
   Put,
@@ -24,9 +25,10 @@ import {
 } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
+import { StudentService } from 'src/modules/Student/student.service';
+import { StudentInternService } from 'src/modules/StudentIntern/student-intern.service';
 import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { UserService } from 'src/modules/User/user.service';
-import { StudentInternService, StudentService } from 'src/services';
 import { ResponseUtils } from 'src/utils/response.util';
 
 @Controller('admin')
@@ -36,6 +38,8 @@ export class AdminController {
   constructor(
     private readonly userService: UserService,
     private readonly responseUtils: ResponseUtils,
+
+    @Inject(StudentService)
     private readonly studentService: StudentService,
     private readonly studentTopicService: StudentTopicService,
     private readonly studentInternService: StudentInternService,

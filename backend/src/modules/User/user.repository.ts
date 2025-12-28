@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateTeacherDto } from 'src/dtos';
-import { User } from 'src/entities';
 import { Repository, UpdateResult } from 'typeorm';
+import { User } from '../common/entities/user.entity';
 
 interface UserOptions {
   id?: number;

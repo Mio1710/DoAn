@@ -1,5 +1,5 @@
 import { ClsService } from 'nestjs-cls';
-import { BaseEntity } from 'src/entities/base.entity';
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import {
   DataSource,
   EntitySubscriberInterface,

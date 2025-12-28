@@ -4,7 +4,7 @@ import {
   HttpException,
   Injectable,
 } from '@nestjs/common';
-import { ReportTopicService } from 'src/services';
+import { ReportTopicService } from 'src/modules/Report/report.service';
 
 @Injectable()
 export class AllowReportTopicGuard implements CanActivate {

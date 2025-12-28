@@ -18,17 +18,21 @@ import { HttpExceptionFilter } from './exceptions/http-exception.filter';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { AuthModule } from './modules/Auth/auth.module';
 import { CommonModule } from './modules/common/common.module';
+import { FacultyModule } from './modules/Faculty/faculty.module';
+import { LO } from './modules/LO/entity/lo.entity';
+import { LOModule } from './modules/LO/lo.module';
+import { ReportModule } from './modules/Report/report.module';
+import { ResultModule } from './modules/Result/result.module';
 import { SemesterModule } from './modules/Semester/semester.module';
-import { SemesterService } from './modules/Semester/semester.service';
+import { StudentModule } from './modules/Student/student.module';
+import { StudentInternModule } from './modules/StudentIntern/student-intern.module';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicModule } from './modules/StudentTopic/student-topic.module';
-import { TeacherInternModule } from './modules/TeacherIntern/teacher-inter.module';
+import { TeacherInternModule } from './modules/TeacherIntern/teacher-intern.module';
 import { Topic } from './modules/Topic/entities/topic.entity';
 import { TopicController } from './modules/Topic/topic.controller';
 import { TopicModule } from './modules/Topic/topic.module';
 import { UserModule } from './modules/User/user.module';
-import * as ListRepositories from './repositories';
-import * as ListServices from './services';
 import { BaseSubscriber } from './subscribers/base.subscribe';
 import * as ListUtils from './utils';
 config();
@@ -45,6 +49,7 @@ config();
       ...Object.values(ListEntities),
       Topic,
       StudentTopic,
+      LO,
     ]),
     TypeOrmModule.forRootAsync(databaseConfig.asProvider()),
     JwtModule.register({
@@ -70,6 +75,12 @@ config();
     TeacherInternModule,
     StudentTopicModule,
     SemesterModule,
+    FacultyModule,
+    StudentModule,
+    LOModule,
+    ReportModule,
+    ResultModule,
+    StudentInternModule,
   ],
   controllers: [
     AppController,
@@ -78,8 +89,6 @@ config();
   ],
   providers: [
     AppService,
-    ...Object.values(ListRepositories),
-    ...Object.values(ListServices),
     ...Object.values(ListCommands),
     ...Object.values(ListUtils),
     HttpExceptionFilter,
@@ -88,7 +97,6 @@ config();
       useClass: RequestInterceptor,
     },
     BaseSubscriber,
-    SemesterService,
   ],
 })
 export class AppModule {}

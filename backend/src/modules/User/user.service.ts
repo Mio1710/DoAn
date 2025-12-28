@@ -5,12 +5,13 @@ import { validate } from 'class-validator';
 import { parse } from 'date-fns';
 import { Response } from 'express';
 import { CreateUserDTO, ImportUserDto, UpdateTeacherDto } from 'src/dtos';
-import { Student, User } from 'src/entities';
-import { UserRepository } from 'src/repositories';
-import { StudentService } from 'src/services';
 import { UpdateResult } from 'typeorm';
 import * as XLSX from 'xlsx';
 import { CommonService } from '../common/common.service';
+import { Student } from '../common/entities/student.entity';
+import { User } from '../common/entities/user.entity';
+import { StudentService } from '../Student/student.service';
+import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService {

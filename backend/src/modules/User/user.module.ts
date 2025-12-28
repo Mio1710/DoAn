@@ -1,16 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Semester, Student, StudentSubject, User } from 'src/entities';
-import { StudentService } from 'src/services';
+import { StudentSubject } from 'src/entities';
+import { FacultyModule } from '../Faculty/faculty.module';
+import { StudentModule } from '../Student/student.module';
+import { User } from '../common/entities/user.entity';
+import { StudentTeacherController } from './student-teacher.controller';
+import { SuperAdminController } from './super-admin.controller';
 import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Student, Semester, StudentSubject]),
+    StudentModule,
+    FacultyModule,
+    TypeOrmModule.forFeature([User, StudentSubject]),
   ],
-  controllers: [],
-  providers: [UserService, UserRepository, StudentService],
+  controllers: [StudentTeacherController, SuperAdminController],
+  providers: [UserService, UserRepository],
   exports: [UserService],
 })
 export class UserModule {}
