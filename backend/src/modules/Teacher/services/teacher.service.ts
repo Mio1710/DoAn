@@ -4,7 +4,7 @@ import { CommonService } from 'src/modules/common/common.service';
 import { Student } from 'src/modules/common/entities/student.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { FindOptionsWhere, IsNull, Repository } from 'typeorm';
-import { Group } from '../StudentTopic/entities/group.entity';
+import { Group } from '../../StudentTopic/entities/group.entity';
 
 @Injectable()
 export class TeacherService {

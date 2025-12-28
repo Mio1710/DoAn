@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { CreateRecommendTopicDto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
-import { RecommendTopicService } from 'src/services/recommend-topic.service';
+import { RecommendTopicService } from 'src/modules/Teacher/services/recommend-topic.service';
 import { ResponseUtils } from 'src/utils';
 
 @Controller('recommend-topics')
