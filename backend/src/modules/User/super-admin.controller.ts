@@ -25,9 +25,7 @@ export class SuperAdminController {
 
     private readonly facultyService: FacultyService,
     private readonly responseUtils: ResponseUtils,
-  ) {
-    console.log('responseUtils', responseUtils);
-  }
+  ) {}
 
   @Post('super-teacher')
   async createSuperTeacher(@Body() user: CreateUserDTO, @Res() res) {

@@ -1,11 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClsService } from 'nestjs-cls';
-import { InternSemester } from 'src/entities';
 import { ListInternQuery } from 'src/interfaces/queries/listIntern.interface';
 import { Repository } from 'typeorm';
 import { CommonService } from '../common/common.service';
 import { Semester } from '../common/entities/semester.entity';
+import { InternSemester } from '../StudentIntern/entity/intern-semester.entity';
 import { Intern } from '../StudentIntern/entity/intern.entity';
 
 @Injectable()

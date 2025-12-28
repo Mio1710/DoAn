@@ -1,10 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TeacherGroupCreateDto } from 'src/dtos/teacher-group.dto';
-import { TeacherGroup, TeacherGroupMember } from 'src/entities';
 import { CommonService } from 'src/modules/common/common.service';
 import { User } from 'src/modules/common/entities/user.entity';
 import { Repository } from 'typeorm';
+import { TeacherGroup } from '../entity/teacher_group.entity';
+import { TeacherGroupMember } from '../entity/teacher_group_member.entity';
 
 @Injectable()
 export class TeacherGroupSerivce {

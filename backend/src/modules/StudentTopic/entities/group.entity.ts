@@ -1,7 +1,7 @@
-import { TeacherGroup } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Student } from 'src/modules/common/entities/student.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
+import { TeacherGroup } from 'src/modules/Teacher/entity/teacher_group.entity';
 import {
   Column,
   Entity,

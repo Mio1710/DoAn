@@ -7,7 +7,7 @@ import { Semester } from 'src/modules/common/entities/semester.entity';
 import { User } from 'src/modules/common/entities/user.entity';
 import { Intern } from 'src/modules/StudentIntern/entity/intern.entity';
 import { Repository } from 'typeorm';
-import { InternSemester } from '../../entities';
+import { InternSemester } from './entity/intern-semester.entity';
 @Injectable()
 export class InternService {
   constructor(

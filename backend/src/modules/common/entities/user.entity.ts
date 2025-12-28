@@ -1,6 +1,6 @@
-import { TeacherGroupMember } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
+import { TeacherGroupMember } from 'src/modules/Teacher/entity/teacher_group_member.entity';
 import {
   Column,
   DeleteDateColumn,

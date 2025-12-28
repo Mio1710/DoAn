@@ -14,7 +14,7 @@ import {
 import { TeacherGroupCreateDto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
-import { TeacherGroupSerivce } from 'src/services';
+import { TeacherGroupSerivce } from 'src/modules/Teacher/services/teacher-group.service';
 import { ResponseUtils } from 'src/utils';
 
 @Controller('teacher-groups')

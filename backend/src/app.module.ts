@@ -33,7 +33,6 @@ import { Topic } from './modules/Topic/entities/topic.entity';
 import { TopicController } from './modules/Topic/topic.controller';
 import { TopicModule } from './modules/Topic/topic.module';
 import { UserModule } from './modules/User/user.module';
-import * as ListServices from './services';
 import { BaseSubscriber } from './subscribers/base.subscribe';
 import * as ListUtils from './utils';
 config();
@@ -90,7 +89,6 @@ config();
   ],
   providers: [
     AppService,
-    ...Object.values(ListServices),
     ...Object.values(ListCommands),
     ...Object.values(ListUtils),
     HttpExceptionFilter,

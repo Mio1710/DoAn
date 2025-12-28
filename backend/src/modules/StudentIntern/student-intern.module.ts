@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { InternSemester } from 'src/entities';
 import { CommonModule } from '../common/common.module';
 import { StudentModule } from './../Student/student.module';
+import { InternSemester } from './entity/intern-semester.entity';
 import { Intern } from './entity/intern.entity';
 import { StudentIntern } from './entity/student-intern.entity';
 import { InternController } from './intern.controller';
