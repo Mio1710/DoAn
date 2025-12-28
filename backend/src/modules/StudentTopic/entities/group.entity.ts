@@ -1,3 +1,5 @@
+import { TeacherGroup } from 'src/entities';
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Student } from 'src/modules/common/entities/student.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import {
@@ -8,8 +10,6 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { TeacherGroup } from './teacher_group.entity';
 
 @Entity('groups')
 export class Group extends BaseEntity {

@@ -1,6 +1,7 @@
-import { Group, StudentIntern } from 'src/entities';
+import { StudentIntern } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
+import { Group } from 'src/modules/StudentTopic/entities/group.entity';
 import { StudentTopic } from 'src/modules/StudentTopic/entities/student-topic.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 // import { Intern } from './intern.entity';

@@ -1,4 +1,4 @@
-import { Group, ReportTopic, Semester } from 'src/entities';
+import { ReportTopic, Semester } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Student } from 'src/modules/common/entities/student.entity';
 import { Topic } from 'src/modules/Topic/entities/topic.entity';
@@ -11,6 +11,7 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
+import { Group } from './group.entity';
 
 @Entity('student_topics')
 @Index('IDX_student_semester', ['student_id', 'semester_id', 'deleted_at'], {

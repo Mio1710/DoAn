@@ -1,7 +1,7 @@
 import { Faculty } from 'src/modules/common/entities/faculty.entity';
+import { Group } from 'src/modules/StudentTopic/entities/group.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
-import { Group } from './group.entity';
 import { Semester } from './semester.entity';
 import { TeacherGroupMember } from './teacher_group_member.entity';
 
