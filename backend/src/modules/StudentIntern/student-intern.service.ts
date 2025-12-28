@@ -6,13 +6,12 @@ import { validate } from 'class-validator';
 import { log } from 'console';
 import { parse } from 'date-fns';
 import { Response } from 'express';
-import { ClsService } from 'nestjs-cls';
 import { ImportStudentDto } from 'src/dtos';
-import { StudentIntern } from 'src/entities';
 import { CommonService } from 'src/modules/common/common.service';
 import { Student } from 'src/modules/common/entities/student.entity';
 import { Repository } from 'typeorm';
 import * as XLSX from 'xlsx';
+import { StudentIntern } from './entity/student-intern.entity';
 
 @Injectable()
 export class StudentInternService {
@@ -22,8 +21,6 @@ export class StudentInternService {
 
     @InjectRepository(StudentIntern)
     private readonly studentInternRepository: Repository<StudentIntern>,
-
-    private readonly cls: ClsService,
 
     private readonly commonService: CommonService,
   ) {}

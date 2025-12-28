@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Semester, StudentSubject } from 'src/entities';
+import { StudentSubject } from 'src/entities';
 import { GoogleStrategy } from 'src/modules/Auth/guards/strategy/google.strategy';
 import { ResponseUtils } from 'src/utils';
 import { AuthService } from '../Auth/auth.service';
@@ -20,7 +20,6 @@ import { TopicService } from './topic.service';
     TypeOrmModule.forFeature([
       StudentSubject,
       Topic,
-      Semester,
       TopicSemester,
       StudentTopic,
     ]),

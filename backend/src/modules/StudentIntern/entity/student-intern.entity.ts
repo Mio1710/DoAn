@@ -1,4 +1,7 @@
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
+import { Semester } from 'src/modules/common/entities/semester.entity';
 import { Student } from 'src/modules/common/entities/student.entity';
+import { ReportIntern } from 'src/modules/Report/entity/report-intern.entity';
 import {
   Column,
   DeleteDateColumn,
@@ -9,10 +12,7 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { BaseEntity } from './base.entity';
 import { Intern } from './intern.entity';
-import { ReportIntern } from './report-intern.entity';
-import { Semester } from './semester.entity';
 
 @Entity('student_intern')
 @Index(

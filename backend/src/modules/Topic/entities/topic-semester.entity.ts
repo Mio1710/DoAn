@@ -1,5 +1,5 @@
-import { Semester } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
+import { Semester } from 'src/modules/common/entities/semester.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { Topic } from './topic.entity';
 

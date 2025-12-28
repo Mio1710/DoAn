@@ -15,8 +15,8 @@ import { RecommendTopicStatusDto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { UserService } from 'src/modules/User/user.service';
-import { ReportInternService } from 'src/services';
 
+import { ReportInternService } from 'src/modules/Report/report-intern.service';
 import { ResponseUtils } from 'src/utils/response.util';
 import { ReportTopicService } from '../../Report/report.service';
 import { ResultService } from '../../Result/result.service';

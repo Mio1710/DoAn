@@ -25,9 +25,10 @@ import { ReportModule } from './modules/Report/report.module';
 import { ResultModule } from './modules/Result/result.module';
 import { SemesterModule } from './modules/Semester/semester.module';
 import { StudentModule } from './modules/Student/student.module';
+import { StudentInternModule } from './modules/StudentIntern/student-intern.module';
 import { StudentTopic } from './modules/StudentTopic/entities/student-topic.entity';
 import { StudentTopicModule } from './modules/StudentTopic/student-topic.module';
-import { TeacherInternModule } from './modules/TeacherIntern/teacher-inter.module';
+import { TeacherInternModule } from './modules/TeacherIntern/teacher-intern.module';
 import { Topic } from './modules/Topic/entities/topic.entity';
 import { TopicController } from './modules/Topic/topic.controller';
 import { TopicModule } from './modules/Topic/topic.module';
@@ -80,6 +81,7 @@ config();
     LOModule,
     ReportModule,
     ResultModule,
+    StudentInternModule,
   ],
   controllers: [
     AppController,

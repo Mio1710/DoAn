@@ -12,10 +12,10 @@ import {
 } from '@nestjs/common';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateInternDto } from 'src/dtos';
-import { Intern } from 'src/entities';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { ResponseUtils } from 'src/utils';
+import { Intern } from '../StudentIntern/entity/intern.entity';
 import { TeacherInternService } from './teacher-intern.service';
 
 @Controller('teacher-interns')

@@ -17,9 +17,9 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ReportInternDto } from 'src/dtos';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
-import { ReportInternService } from 'src/services';
 import { ResponseUtils } from 'src/utils';
 import * as stream from 'stream';
+import { ReportInternService } from './report-intern.service';
 
 @Controller('report-intern')
 @UseGuards(AuthGuard)

@@ -1,6 +1,6 @@
+import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
-import { BaseEntity } from './base.entity';
-import { StudentIntern } from './student-intern.entity';
+import { StudentIntern } from '../../StudentIntern/entity/student-intern.entity';
 
 @Entity('report_intern')
 export class ReportIntern extends BaseEntity {

@@ -2,11 +2,12 @@ import { HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { ReportInternDto } from 'src/dtos';
-import { ReportIntern, StudentIntern } from 'src/entities';
 import { CommonService } from 'src/modules/common/common.service';
 import { deleteFile, downloadFile, uploadFile } from 'src/utils/s3-client.util';
 import { Repository, UpdateResult } from 'typeorm';
-import { StudentInternService } from './student-intern.service';
+import { StudentIntern } from '../StudentIntern/entity/student-intern.entity';
+import { StudentInternService } from '../StudentIntern/student-intern.service';
+import { ReportIntern } from './entity/report-intern.entity';
 
 const randomName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex');
 
@@ -16,7 +17,6 @@ export class ReportInternService {
     private readonly reportInternRepository: Repository<ReportIntern>,
     private readonly studentInternService: StudentInternService,
     private readonly commonService: CommonService,
-    // private readonly s3ClientUtils: S3ClientUtil,
   ) {}
 
   async create(reportIntern: ReportInternDto): Promise<ReportIntern> {
@@ -54,9 +54,6 @@ export class ReportInternService {
     }
   }
 
-  // async getLists(options): Promise<ReportIntern[]> {
-  //   return await this.reportInternRepository.find({ ...options });
-  // }
   async getLists(options): Promise<ReportIntern[]> {
     const studentId = options.student_id;
     const studentIntern = await this.getStudentIntern(studentId);

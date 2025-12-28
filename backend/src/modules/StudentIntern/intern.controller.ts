@@ -13,10 +13,10 @@ import {
 } from '@nestjs/common';
 import { Roles } from 'src/decorators/role.decorator';
 import { CreateInternDto } from 'src/dtos';
-import { Intern } from 'src/entities';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
-import { InternService } from 'src/services';
+import { Intern } from 'src/modules/StudentIntern/entity/intern.entity';
+import { InternService } from 'src/modules/StudentIntern/intern.service';
 import { ResponseUtils } from 'src/utils';
 // import { UserService } from '../services/user.service';
 

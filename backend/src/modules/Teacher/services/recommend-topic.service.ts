@@ -1,7 +1,7 @@
 import { HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateRecommendTopicDto, RecommendTopicStatusDto } from 'src/dtos';
-import { RecommendTopic } from 'src/entities';
+import { RecommendTopic } from 'src/modules/Report/entity/recommend-topic.entity';
 import { Repository } from 'typeorm';
 
 export class RecommendTopicService {

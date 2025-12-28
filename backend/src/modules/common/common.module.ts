@@ -1,9 +1,9 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Semester } from 'src/entities';
 import { ResponseUtils } from 'src/utils';
 import { CommonService } from './common.service';
 import { Faculty } from './entities/faculty.entity';
+import { Semester } from './entities/semester.entity';
 import { Student } from './entities/student.entity';
 import { User } from './entities/user.entity';
 

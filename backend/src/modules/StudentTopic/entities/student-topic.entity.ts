@@ -1,5 +1,5 @@
-import { Semester } from 'src/entities';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
+import { Semester } from 'src/modules/common/entities/semester.entity';
 import { Student } from 'src/modules/common/entities/student.entity';
 import { ReportTopic } from 'src/modules/Report/entity/report.entity';
 import { Topic } from 'src/modules/Topic/entities/topic.entity';

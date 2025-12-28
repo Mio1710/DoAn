@@ -9,11 +9,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateSemesterDto } from 'src/dtos';
-import { Semester } from 'src/entities';
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { ResponseUtils } from 'src/utils';
 import { CommonService } from '../common/common.service';
+import { Semester } from '../common/entities/semester.entity';
 import { SemesterService } from './semester.service';
 
 @Controller('semesters')

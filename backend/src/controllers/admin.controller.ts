@@ -26,9 +26,9 @@ import {
 import { AuthGuard } from 'src/modules/Auth/guards/auth.guard';
 import { RolesGuard } from 'src/modules/Auth/guards/roles.guard';
 import { StudentService } from 'src/modules/Student/student.service';
+import { StudentInternService } from 'src/modules/StudentIntern/student-intern.service';
 import { StudentTopicService } from 'src/modules/StudentTopic/student-topic.service';
 import { UserService } from 'src/modules/User/user.service';
-import { StudentInternService } from 'src/services';
 import { ResponseUtils } from 'src/utils/response.util';
 
 @Controller('admin')
